@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.20989583333333334" />
+        <entry key="app/src/main/res/drawable/button.xml" value="0.23108108108108108" />
+        <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24_fill.xml" value="0.228" />
+        <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24_stroke.xml" value="0.12477477477477478" />
+        <entry key="app/src/main/res/drawable/ic_baseline_dehaze_24.xml" value="0.15225225225225225" />
+        <entry key="app/src/main/res/drawable/ic_baseline_explore_24_stroke.xml" value="0.12477477477477478" />
+        <entry key="app/src/main/res/drawable/ic_baseline_home_24_stroke.xml" value="0.11261261261261261" />
+        <entry key="app/src/main/res/drawable/ic_baseline_question_answer_24_stroke.xml" value="0.12477477477477478" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.23108108108108108" />
+        <entry key="app/src/main/res/drawable/input_field.xml" value="0.23108108108108108" />
+        <entry key="app/src/main/res/drawable/question_answer.xml" value="0.22117117117117116" />
+        <entry key="app/src/main/res/drawable/searchButton.xml" value="0.23963963963963963" />
+        <entry key="app/src/main/res/drawable/search_button.xml" value="0.22117117117117116" />
+        <entry key="app/src/main/res/drawable/selected_button.xml" value="0.11576576576576576" />
+        <entry key="app/src/main/res/drawable/shape_talkee.xml" value="0.12522522522522522" />
+        <entry key="app/src/main/res/drawable/shape_talker.xml" value="0.12522522522522522" />
+        <entry key="app/src/main/res/drawable/unselected_button.xml" value="0.20925925925925926" />
+        <entry key="app/src/main/res/layout/QA_icon_layout.xml" value="0.1059806508355321" />
+        <entry key="app/src/main/res/layout/account_fragment.xml" value="0.268018018018018" />
+        <entry key="app/src/main/res/layout/account_icon_layout.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_entity.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.2045045045045045" />
+        <entry key="app/src/main/res/layout/activity_set_subject.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/content_home_list.xml" value="0.16847826086956522" />
+        <entry key="app/src/main/res/layout/explore_fragment.xml" value="0.1248900615655233" />
+        <entry key="app/src/main/res/layout/explore_icon_layout.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_account.xml" value="0.1440922190201729" />
+        <entry key="app/src/main/res/layout/fragment_bio.xml" value="0.16847826086956522" />
+        <entry key="app/src/main/res/layout/fragment_chem.xml" value="0.16847826086956522" />
+        <entry key="app/src/main/res/layout/fragment_chinese.xml" value="0.16847826086956522" />
+        <entry key="app/src/main/res/layout/fragment_description.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_english.xml" value="0.16847826086956522" />
+        <entry key="app/src/main/res/layout/fragment_explore.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_geo.xml" value="0.16847826086956522" />
+        <entry key="app/src/main/res/layout/fragment_history.xml" value="0.16847826086956522" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_math.xml" value="0.16847826086956522" />
+        <entry key="app/src/main/res/layout/fragment_physics.xml" value="0.16847826086956522" />
+        <entry key="app/src/main/res/layout/fragment_pol.xml" value="0.16847826086956522" />
+        <entry key="app/src/main/res/layout/fragment_practice.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_property.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_q_a.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_relation.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/home_fragment.xml" value="0.1248900615655233" />
+        <entry key="app/src/main/res/layout/home_icon_layout.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/list_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/q_a_fragment.xml" value="0.13082673702726474" />
+        <entry key="app/src/main/res/layout/question_and_answer_icon_layout.xml" value="0.335" />
+        <entry key="app/src/main/res/menu/menu.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/popup_menu.xml" value="0.17644444444444443" />
+        <entry key="searchview/src/main/res/layout/activity_main.xml" value="0.21666666666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.335" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

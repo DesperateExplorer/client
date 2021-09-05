@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.example.testing.HomeActivity">
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_button"
+            android:text="       请输入一段文本"
+            android:textAlignment="viewStart"
+            android:textColor="@color/gray"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <com.qmuiteam.qmui.widget.tab.QMUITabSegment
+        android:id="@+id/explore_tabSegment"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:background="@color/qmui_config_color_white"
+        app:qmui_bottomDividerColor="@color/gray"
+        app:qmui_bottomDividerHeight="1px" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/explore_contentViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="100"
+        android:fitsSystemWindows="true" />
+
+
+</LinearLayout>
