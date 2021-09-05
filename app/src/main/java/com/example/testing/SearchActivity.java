@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
@@ -15,17 +14,13 @@ import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 import scut.carson_ho.searchview.ICallBack;
 import scut.carson_ho.searchview.SearchView;
 import scut.carson_ho.searchview.bCallBack;
 
-public class search extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
 
 
     // 初始化搜索框变量
@@ -36,11 +31,12 @@ public class search extends AppCompatActivity {
     private ListView listView;
     private BaseAdapter adapter;
     private int counter;
+    String sort;
 
     // 设置popup Menu
     private void showPopupMenu(View view) {
         // 这里的view代表popupMenu需要依附的view
-        PopupMenu popupMenu = new PopupMenu(search.this, view);
+        PopupMenu popupMenu = new PopupMenu(SearchActivity.this, view);
         // 获取布局文件
         popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
         popupMenu.show();
@@ -48,8 +44,8 @@ public class search extends AppCompatActivity {
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                // 控件每一个item的点击事件
-                System.out.println(item);
+                textView.setText(item.getTitle());
+                sort = (String) item.getTitle();
                 return true;
             }
         });
@@ -79,9 +75,19 @@ public class search extends AppCompatActivity {
         searchView.setOnClickSearch(new ICallBack() {
             @Override
             public void SearchAciton(String string) {
-                //调用网络接口得到result
-                //System.out.println("我收到了" + string);
-                //result = func(string, subject)
+
+                //TODO：string是用户输入的关键词，需要存
+                //TODO：调用网络接口得到result
+                //parameters: string, subject, sort
+
+                //subject
+                Intent intent = getIntent();
+                String subject = intent.getStringExtra("subject");
+                System.out.println("search activity: "+subject);
+
+                //sort: 本文件声明的sort
+
+                //result{"label","url"}
 
                 result.add("高原山地气候");
                 result.add("帕米尔高原");
@@ -108,36 +114,44 @@ public class search extends AppCompatActivity {
                 final ArrayList<String> list = new ArrayList<>();
                 counter = 0;
                 int oldCounter = counter;
-                for (counter = oldCounter; counter < oldCounter + 15 && counter<result.size(); counter++) {
+                for (counter = oldCounter; counter <result.size(); counter++) {
                     list.add(result.get(counter));
                 }
 
-                adapter = new ArrayAdapter<String>(search.this, android.R.layout.simple_list_item_1, list);
+                adapter = new ArrayAdapter<String>(SearchActivity.this, android.R.layout.simple_list_item_1, list);
                 listView.setAdapter(adapter);
-                listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-                    @Override
-                    public void onScrollStateChanged(AbsListView view, int scrollState) {
-                    }
-
-                    @Override
-                    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                        if (firstVisibleItem != 0) { // 不为0则表示有下拉动作
-                            if ((firstVisibleItem + visibleItemCount) > totalItemCount - 2) { // 当前第一个完全可见的item再下拉一个页面长度，即变为倒数第二个时
-                                // 在此加载数据
-                                int oldCounter = counter;
-                                for (counter = oldCounter; counter < oldCounter + 15 && counter<result.size(); counter++) {
-                                    list.add(result.get(counter));
-                                }
-                                adapter.notifyDataSetChanged();
-                            }
-                        }
-                    }
-                });
-                
+//                listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+//                    @Override
+//                    public void onScrollStateChanged(AbsListView view, int scrollState) {
+//                    }
+//
+//                    @Override
+//                    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+//                        if (firstVisibleItem != 0) { // 不为0则表示有下拉动作
+//                            if ((firstVisibleItem + visibleItemCount) > totalItemCount - 2) { // 当前第一个完全可见的item再下拉一个页面长度，即变为倒数第二个时
+//                                // 在此加载数据
+//                                int oldCounter = counter;
+//                                for (counter = oldCounter; counter < oldCounter + 15 && counter<result.size(); counter++) {
+//                                    list.add(result.get(counter));
+//                                }
+//                                adapter.notifyDataSetChanged();
+//                                listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+//                                    @Override
+//                                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                                        Intent intent = new Intent(search.this,EntityActivity.class);
+//                                        intent.putExtra("label", list.get(i));
+//                                        startActivity(intent);
+//                                    }
+//                                });
+//                            }
+//                        }
+//                    }
+//                });
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Intent intent = new Intent(search.this,EntityActivity.class);
+                        //TODO：label，subject 获得实体详情页的json
+                        Intent intent = new Intent(SearchActivity.this,EntityActivity.class);
                         intent.putExtra("label", list.get(i));
                         startActivity(intent);
                     }

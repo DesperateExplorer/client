@@ -89,9 +89,53 @@ public class EntityActivity extends QMUIFragmentActivity {
         tmp.add("性质1" + ": "+ "一元二次方程的一般形式是ax^2＋bx＋c=0（a≠0）");
         tmp.add("性质2" + ": "+ "通过开平方运算解一元二次方程的方法叫做直接开平方法");
         return tmp;
-
     }
 
+    public ArrayList<String> getPredicate()
+    {
+        ArrayList<String> tmp = new ArrayList<>();
+        tmp.add("强相关于");
+        tmp.add("强相关于");
+        tmp.add("出处");
+        tmp.add("名称");
+        tmp.add("类型");
+        tmp.add("页码");
+        tmp.add("强相关于");
+        tmp.add("内容");
+        tmp.add("强相关于");
+        return tmp;
+    }
+
+    public ArrayList<String> getObject()
+    {
+        ArrayList<String> tmp = new ArrayList<>();
+        tmp.add("边");
+        tmp.add("三角");
+        tmp.add("出处");
+        tmp.add("名称");
+        tmp.add("类型");
+        tmp.add("页码");
+        tmp.add("角");
+        tmp.add("三角形任何一边的平方等于其他两边的平方和减去这两边与它们夹角的余弦的积的两倍");
+        tmp.add("三角形");
+        return tmp;
+    }
+
+    public ArrayList<String> getQuestions()
+    {
+        ArrayList<String> tmp = new ArrayList<>();
+        tmp.add("下列与我国隔海相望的国家中,纬度位置最高的是()");
+        tmp.add("近日朝韩局势日益紧张,如要了解朝鲜、韩国的位置,应查阅()");
+        tmp.add("我国在朝核六方会谈中占很重的分量,除了是因为我国是国际大国外,还与其中两国接壤,他们是()");
+        tmp.add("与我国隔海相望的一组国家是()");
+        tmp.add("下列四组国家中,全部与我国隔海相望的一组国家是()");
+        tmp.add("列国家与我国陆地接壤的是()");
+        tmp.add("近年来,日本与邻国因岛屿争端,关系日益紧张。下列不属于日本近邻的国家是()");
+        tmp.add("下列各国家中,人均国民生产总值最高的是()");
+        tmp.add("与我国隔海相望的国家有()");
+        tmp.add("第17届亚运会于2014年9月19日—10月4日在韩国仁川举行,我国运动员取得了优异的成绩。关于韩国与我国的位置关系说法正确的是()");
+        return tmp;
+    }
 
 
 }

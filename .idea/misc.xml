@@ -25,11 +25,13 @@
         <entry key="app/src/main/res/layout/account_icon_layout.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_entity.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_link.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.2045045045045045" />
         <entry key="app/src/main/res/layout/activity_set_subject.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_test.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_home_list.xml" value="0.16847826086956522" />
         <entry key="app/src/main/res/layout/explore_fragment.xml" value="0.1248900615655233" />
         <entry key="app/src/main/res/layout/explore_icon_layout.xml" value="0.335" />

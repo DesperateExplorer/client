@@ -1,7 +1,6 @@
 package com.example.testing.fragment;
 
 import android.content.Intent;
-import android.media.ImageWriter;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,8 +12,6 @@ import android.widget.ImageView;
 
 import com.example.testing.LoginActivity;
 import com.example.testing.R;
-import com.example.testing.activity.EntityActivity;
-import com.example.testing.search;
 
 /**
  * A simple {@link Fragment} subclass.

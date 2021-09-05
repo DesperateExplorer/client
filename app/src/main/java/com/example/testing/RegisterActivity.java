@@ -18,6 +18,9 @@ public class RegisterActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //TODO：发送phone number和password
+                //TODO：加验证密码+TODO：加入global variable，记录当前用户的id
                 finish();
             }
         });

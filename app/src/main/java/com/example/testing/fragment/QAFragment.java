@@ -1,7 +1,6 @@
 
 package com.example.testing.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,14 +24,9 @@ import android.widget.Toast;
 
 import com.example.testing.MyApplication;
 import com.example.testing.R;
-import com.example.testing.activity.SetSubject;
 import com.example.testing.adapter.ChatAdapter;
 import com.example.testing.model.ChatModel;
-import com.example.testing.search;
 import com.qmuiteam.qmui.arch.QMUIFragment;
-import com.qmuiteam.qmui.skin.QMUISkinHelper;
-import com.qmuiteam.qmui.skin.QMUISkinValueBuilder;
-import com.qmuiteam.qmui.skin.SkinWriter;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.tab.QMUITabBuilder;
 import com.qmuiteam.qmui.widget.tab.QMUITabIndicator;
@@ -292,6 +286,8 @@ public class QAFragment extends QMUIFragment {
      */
     void reply(String msg){
         String rMsg="";
+        //TODO:给后端发inputstring，subject；获得回答
+        //当前学科：currentSubject——语文，数学...（中文字符串）
         switch (msg){
             case "hello":
                 rMsg="hello! How are you？";

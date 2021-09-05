@@ -14,9 +14,7 @@ import android.widget.ListView;
 
 import com.example.testing.R;
 import com.example.testing.activity.EntityActivity;
-import com.example.testing.search;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**

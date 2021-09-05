@@ -4,11 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.testing.HomeActivity;
 import com.example.testing.MyApplication;
-import android.app.Fragment;
+
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,7 +20,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class SetSubject extends AppCompatActivity {
+public class SetSubjectActivity extends AppCompatActivity {
 
     private MyApplication myApp;
     private List<Integer> subList;
@@ -55,7 +54,7 @@ public class SetSubject extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SetSubject.this, HomeActivity.class);
+                Intent intent = new Intent(SetSubjectActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -155,6 +154,9 @@ public class SetSubject extends AppCompatActivity {
                     }
                     myApp.setSubjectList(newList);
                     System.out.println(newList);
+
+                    //TODO:发送改后的学科列表
+                    //string =
                 }
             }
         });

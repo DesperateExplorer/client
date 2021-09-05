@@ -19,21 +19,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.testing.activity.SetSubject;
 import com.example.testing.MyApplication;
 import com.example.testing.R;
-import com.example.testing.manager.QDSchemeManager;
-import com.example.testing.search;
+import com.example.testing.activity.LinkActivity;
 import com.example.testing.HomeActivity;
 import com.qmuiteam.qmui.arch.QMUIFragment;
-import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
 import com.qmuiteam.qmui.arch.annotation.FragmentScheme;
 import com.qmuiteam.qmui.skin.QMUISkinHelper;
 import com.qmuiteam.qmui.skin.QMUISkinValueBuilder;
 import com.qmuiteam.qmui.skin.SkinWriter;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
-import com.qmuiteam.qmui.util.QMUIViewHelper;
-import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.tab.QMUITabBuilder;
 import com.qmuiteam.qmui.widget.tab.QMUITabIndicator;
 import com.qmuiteam.qmui.widget.tab.QMUITabSegment;
@@ -48,7 +43,7 @@ import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
+ * Use the {@link ExploreFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 
@@ -69,6 +64,7 @@ public class ExploreFragment extends QMUIFragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
 
     public ExploreFragment() {
         // Required empty public constructor
@@ -99,6 +95,7 @@ public class ExploreFragment extends QMUIFragment {
     @BindView(R.id.explore_contentViewPager)
     ViewPager mContentViewPager;
     private MyApplication myApp;
+    String currentSubject;
 
     public enum ContentPage {
         Item1(0),
@@ -257,24 +254,18 @@ public class ExploreFragment extends QMUIFragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),search.class);
+                Intent intent = new Intent(getActivity(), LinkActivity.class);
+                intent.putExtra("subject", currentSubject);
                 startActivity(intent);
             }
         });
 
         //mQDItemDescription = QDDataManager.getInstance().getDescription(this.getClass());
         initTabAndPager();
-//        initTopBar();
 
         return rootView;
     }
 
-
-    //Build Top Bar
-//    private void initTopBar() {
-//
-//        mTopBar.setTitle("实体链接功能");
-//    }
 
     //For subject menu
     private void initTabAndPager() {
@@ -293,6 +284,7 @@ public class ExploreFragment extends QMUIFragment {
             mTabSegment.addTab(tabBuilder.setText(getSubject.get(mSubjectList.get(i))).build(getContext()));
         }
         mTabSegment.notifyDataChanged();
+        currentSubject = getSubject.get(mSubjectList.get(0));
 
         System.out.println("current Item Count:"+mCurrentItemCount);
 
@@ -307,6 +299,7 @@ public class ExploreFragment extends QMUIFragment {
             @Override
             public void onTabSelected(int index) {
                 Toast.makeText(getContext(), "select index " + index, Toast.LENGTH_SHORT).show();
+                currentSubject = getSubject.get(mSubjectList.get(index));
             }
 
             @Override

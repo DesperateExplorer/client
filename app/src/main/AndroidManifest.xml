@@ -11,13 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".activity.LinkActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.TestActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.EntityActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.SetSubject"
+            android:name=".activity.SetSubjectActivity"
             android:exported="true" />
         <activity
-            android:name=".search"
+            android:name=".SearchActivity"
             android:exported="true" />
         <activity
             android:name=".HomeActivity"
