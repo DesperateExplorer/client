@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_explore_24_stroke.xml" value="0.12477477477477478" />
         <entry key="app/src/main/res/drawable/ic_baseline_home_24_stroke.xml" value="0.11261261261261261" />
         <entry key="app/src/main/res/drawable/ic_baseline_question_answer_24_stroke.xml" value="0.12477477477477478" />
+        <entry key="app/src/main/res/drawable/ic_baseline_star_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.23108108108108108" />
         <entry key="app/src/main/res/drawable/input_field.xml" value="0.23108108108108108" />
         <entry key="app/src/main/res/drawable/question_answer.xml" value="0.22117117117117116" />
@@ -28,9 +29,10 @@
         <entry key="app/src/main/res/layout/activity_link.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_register.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.15932203389830507" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.2045045045045045" />
         <entry key="app/src/main/res/layout/activity_set_subject.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_star_list.xml" value="0.11621621621621622" />
         <entry key="app/src/main/res/layout/activity_test.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_home_list.xml" value="0.16847826086956522" />
         <entry key="app/src/main/res/layout/explore_fragment.xml" value="0.1248900615655233" />
@@ -55,6 +57,7 @@
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.1248900615655233" />
         <entry key="app/src/main/res/layout/home_icon_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/list_view.xml" value="0.1" />
         <entry key="app/src/main/res/layout/q_a_fragment.xml" value="0.13082673702726474" />
         <entry key="app/src/main/res/layout/question_and_answer_icon_layout.xml" value="0.335" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.1" />

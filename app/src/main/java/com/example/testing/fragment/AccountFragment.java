@@ -9,9 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.testing.LoginActivity;
+import com.example.testing.MyApplication;
 import com.example.testing.R;
+import com.example.testing.activity.StarListActivity;
+
+import org.w3c.dom.Text;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,15 +71,32 @@ public class AccountFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
-        //绑定icon
+        //绑定组件
         ImageView imageView = view.findViewById(R.id.account_icon);
-        imageView.setOnClickListener(new View.OnClickListener() {
+        TextView ID = view.findViewById(R.id.Username);
+        MyApplication myapp = (MyApplication) getActivity().getApplication();
+        TextView exit = view.findViewById(R.id.exit);
+        TextView starList = view.findViewById(R.id.starred);
+
+        //设置动作
+        ID.setText(myapp.getUsername());
+        exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
             }
         });
+
+        starList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), StarListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         return view;
     }
 }

@@ -15,7 +15,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ import com.example.testing.activity.SetSubjectActivity;
 import com.example.testing.R;
 import com.example.testing.SearchActivity;
 import com.example.testing.HomeActivity;
+import com.example.testing.jsonTool.EntityDescription;
 import com.qmuiteam.qmui.arch.QMUIFragment;
 import com.qmuiteam.qmui.arch.annotation.FragmentScheme;
 import com.qmuiteam.qmui.skin.QMUISkinHelper;
@@ -33,6 +37,7 @@ import com.qmuiteam.qmui.widget.tab.QMUITabBuilder;
 import com.qmuiteam.qmui.widget.tab.QMUITabIndicator;
 import com.qmuiteam.qmui.widget.tab.QMUITabSegment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -150,6 +155,7 @@ public class HomeFragment extends QMUIFragment {
     private ContentPage mDestPage = ContentPage.Item1;
     private List<Integer> mSubjectList = new LinkedList<>();
     private int mCurrentItemCount = TAB_COUNT;
+    private BaseAdapter adapter;
 //    private int mCurrentItemCount = mSubjectList.size();
     private Map<Integer, String> getSubject = new HashMap<Integer,String>(){
         {
@@ -165,6 +171,8 @@ public class HomeFragment extends QMUIFragment {
         }
     };
 
+    private Map<String,Integer> getInt = new HashMap<>(); //等到拿到全局的学科信息
+
     private PagerAdapter mPagerAdapter = new PagerAdapter() {
         @Override
         public boolean isViewFromObject(View view, Object object) {
@@ -178,13 +186,16 @@ public class HomeFragment extends QMUIFragment {
 
         @Override
         public Object instantiateItem(final ViewGroup container, int position) {
+            System.out.println("position: "+position);
+            System.out.println("subject: " +getInt.get(currentSubject));
             ContentPage page = ContentPage.getPage(position);
-            View view = getPageView(page);
+            View view = getPageView(page, position);
             view.setTag(page);
             ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             container.addView(view, params);
             return view;
+
         }
 
         @Override
@@ -216,6 +227,8 @@ public class HomeFragment extends QMUIFragment {
 //        }
 //
 //    }
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -269,8 +282,9 @@ public class HomeFragment extends QMUIFragment {
             }
         });
 
-        //mQDItemDescription = QDDataManager.getInstance().getDescription(this.getClass());
+        //初始化横向滑动的tab
         initTabAndPager();
+
         return rootView;
     }
 
@@ -285,11 +299,13 @@ public class HomeFragment extends QMUIFragment {
         mCurrentItemCount = mSubjectList.size();
         mPagerAdapter.notifyDataSetChanged();
         mTabSegment.reset();
+        getInt.clear();
 
         QMUITabBuilder tabBuilder = mTabSegment.tabBuilder().setColor(R.color.black,R.color.qmui_config_color_gray_9);
 
         for (int i = 0; i < mCurrentItemCount; i++) {
             mTabSegment.addTab(tabBuilder.setText(getSubject.get(mSubjectList.get(i))).build(getContext()));
+            getInt.put(getSubject.get(mSubjectList.get(i)),i);
             //mTabSegment.addTab(tabBuilder.setText(getSubject.get(i)).build(getContext()));
         }
         mTabSegment.notifyDataChanged();
@@ -327,27 +343,56 @@ public class HomeFragment extends QMUIFragment {
         });
     }
 
-    private View getPageView(ContentPage page) {
+    private View getPageView(ContentPage page, int position) {
         View view = mPageMap.get(page);
+        System.out.println("position:"+position);
+        System.out.println("subject:"+getInt.get(currentSubject));
         if (view == null) {
-            TextView textView = new TextView(getContext());
-            textView.setGravity(Gravity.CENTER);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
-            textView.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
-            textView.setText("这是 " + getSubject.get(mSubjectList.get(page.getPosition())) + " 的界面");
-            QMUISkinHelper.setSkinValue(textView, new SkinWriter(){
-                @Override
-                public void write(QMUISkinValueBuilder builder) {
-                    builder.textColor(R.color.black);
+            View newView = getLayoutInflater().inflate(R.layout.list_view,null);
+
+            //设置list view的内容
+            //ListView listView = (ListView) newView.findViewById(R.id.listView);
+            ListView listView = new ListView(getContext());
+
+            MyApplication myapp = (MyApplication) getActivity().getApplication();
+            ArrayList<String> history_label = myapp.getHistoryLabel();
+            ArrayList<String> history_subject = myapp.getHistorySubject();
+            int pos;
+
+            //准备在listview中展示的数据格式
+            final List listmap = new ArrayList<>();
+            for (int counter = 0; counter < history_label.size() && counter < history_subject.size(); counter++) {
+                Map map = new HashMap();
+                System.out.println(getInt.get(currentSubject));
+                System.out.println(getInt.get(history_subject.get(counter)));
+                if(position == getInt.get(history_subject.get(counter))) {
+                    System.out.println("yes!");
+                    map.put("label", history_label.get(counter));
+                    map.put("subject", history_subject.get(counter));
+                    listmap.add(map);
                 }
-            });
+            }
+            adapter = new SimpleAdapter(getContext(), listmap , android.R.layout.simple_list_item_2, new String[]{"label","subject"},new int[]{android.R.id.text1,android.R.id.text2});
+            listView.setAdapter(adapter);
+
+//            TextView textView = new TextView(getContext());
+//            textView.setGravity(Gravity.CENTER);
+//            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+//            textView.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+//            textView.setText("这是 " + getSubject.get(mSubjectList.get(page.getPosition())) + " 的界面");
+//            QMUISkinHelper.setSkinValue(textView, new SkinWriter(){
+//                @Override
+//                public void write(QMUISkinValueBuilder builder) {
+//                    builder.textColor(R.color.black);
+//                }
+//            });
 //            textView.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
 //                    QDSchemeManager.getInstance().handle("qmui://tab?mode=2&name=xixi");
 //                }
 //            });
-            view = textView;
+            view = listView;
             mPageMap.put(page, view);
         }
         return view;
@@ -359,4 +404,6 @@ public class HomeFragment extends QMUIFragment {
                 "refreshFromScheme: name = " + bundle.getString("name"),
                 Toast.LENGTH_SHORT).show();
     }
+
+
 }

@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.example.testing.R;
 import com.example.testing.activity.EntityActivity;
+import com.example.testing.activity.TestActivity;
 
 import java.util.ArrayList;
 
@@ -37,8 +38,14 @@ public class PracticeFragment extends Fragment {
     private ListView listView;
     private BaseAdapter adapter;
     private int counter;
-    private ArrayList<String> questions;
+
     private EntityActivity activity;
+    private ArrayList<String> questions;
+    private ArrayList<String> answers;
+    private ArrayList<String> BranchA;
+    private ArrayList<String> BranchB;
+    private ArrayList<String> BranchC;
+    private ArrayList<String> BranchD;
 
     public PracticeFragment() {
         // Required empty public constructor
@@ -82,6 +89,11 @@ public class PracticeFragment extends Fragment {
 
         //获得变量的值
         questions = ((EntityActivity) getActivity()).getQuestions();
+        answers = ((EntityActivity) getActivity()).getAnswer();
+        BranchA = ((EntityActivity) getActivity()).getBranchA();
+        BranchB = ((EntityActivity) getActivity()).getBranchB();
+        BranchC = ((EntityActivity) getActivity()).getBranchC();
+        BranchD = ((EntityActivity) getActivity()).getBranchD();
 
         //在listView中显示出来
         final ArrayList<String> list = new ArrayList<>();
@@ -97,17 +109,13 @@ public class PracticeFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(),EntityActivity.class);
-//                intent.putExtra("answer", .get(i));
-//                intent.putExtra("question", .get(i));
-//                intent.putExtra("answer", .get(i));
-//                intent.putExtra("answer", .get(i));
-//                intent.putExtra("answer", .get(i));
-//                intent.putExtra("answer", .get(i));
-//                intent.putExtra("question", .get(i));
-//                intent.putExtra("answer", .get(i));
-//                intent.putExtra("answer", .get(i));
-//                intent.putExtra("answer", .get(i));
+                Intent intent = new Intent(getActivity(), TestActivity.class);
+                intent.putExtra("answer",answers.get(i));
+                intent.putExtra("question",questions.get(i));
+                intent.putExtra("A",BranchA.get(i));
+                intent.putExtra("B",BranchB.get(i));
+                intent.putExtra("C",BranchC.get(i));
+                intent.putExtra("D",BranchD.get(i));
                 startActivity(intent);
             }
         });

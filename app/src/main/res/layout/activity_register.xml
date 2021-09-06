@@ -68,12 +68,12 @@
       app:layout_constraintVertical_bias="0.403" />
 
   <EditText
-      android:id="@+id/editTextTextPersonName"
+      android:id="@+id/Userid_edit_text"
       android:layout_width="320dp"
       android:layout_height="51dp"
       android:background="@drawable/input_field"
       android:ems="10"
-      android:hint="Phone Number"
+      android:hint="UserName"
       android:inputType="textPersonName"
       android:textColorHint="@color/gray"
       app:layout_constraintBottom_toBottomOf="parent"
@@ -84,7 +84,7 @@
       app:layout_constraintVertical_bias="0.337" />
 
   <EditText
-      android:id="@+id/editTextTextPassword"
+      android:id="@+id/Password_edit_text"
       android:layout_width="320dp"
       android:layout_height="51dp"
       android:background="@drawable/input_field"
