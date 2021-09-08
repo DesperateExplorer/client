@@ -27,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //TODO：发送phone number和password
+                //TODO：发送Username和password
                 //TODO：加验证密码+TODO：加入global variable，记录当前用户的id
                 myapp = (MyApplication) getApplication();
                 UserID = username.getText().toString();

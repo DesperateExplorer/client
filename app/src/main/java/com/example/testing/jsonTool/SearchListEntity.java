@@ -4,6 +4,13 @@ public class SearchListEntity {
     private String label;
     private String uri;
 
+    //构造函数
+    SearchListEntity(String label, String uri)
+    {
+        this.label = label;
+        this.uri = uri;
+    }
+
     public void setLabel(String s){
         this.label = s;
     }

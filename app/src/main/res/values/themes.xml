@@ -41,6 +41,17 @@
     </style>
 
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />
-
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="my_dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+
+    <style name="dialogstyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>
+
 </resources>

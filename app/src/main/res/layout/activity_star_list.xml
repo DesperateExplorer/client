@@ -22,14 +22,14 @@
             android:layout_weight="0.5" />
 
         <ImageView
-            android:id="@+id/back_to_list"
+            android:id="@+id/starlist_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:clickable="true"
             app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
 
         <TextView
-            android:id="@+id/entity_header"
+            android:id="@+id/starlist_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -12,8 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.testing.LoginActivity;
+import com.example.testing.MainActivity;
 import com.example.testing.MyApplication;
 import com.example.testing.R;
+import com.example.testing.activity.HistoryListActivity;
 import com.example.testing.activity.StarListActivity;
 
 import org.w3c.dom.Text;
@@ -77,13 +79,14 @@ public class AccountFragment extends Fragment {
         MyApplication myapp = (MyApplication) getActivity().getApplication();
         TextView exit = view.findViewById(R.id.exit);
         TextView starList = view.findViewById(R.id.starred);
+        TextView historyList = view.findViewById(R.id.history_list);
 
         //设置动作
         ID.setText(myapp.getUsername());
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -96,6 +99,13 @@ public class AccountFragment extends Fragment {
             }
         });
 
+        historyList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), HistoryListActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

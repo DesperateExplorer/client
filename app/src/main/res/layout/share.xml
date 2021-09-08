@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="43dp"
+    android:paddingLeft="22.5dp"
+    android:paddingRight="22.5dp"
+    android:paddingTop="46dp" >
+
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="我在Edukg上发现了一个很好知识点，快来看看吧"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/Preview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_textview_border"
+        android:scrollbars="vertical"
+        android:singleLine="false"
+        android:maxLines="15"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="fill_parent"
+        android:layout_height="42dip"
+        android:layout_marginTop="16dip"
+        android:background="@drawable/btn_round_selector"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="#888888"
+        android:textSize="18sp" />
+
+</LinearLayout>

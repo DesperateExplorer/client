@@ -1,12 +1,5 @@
 package com.example.testing.activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -14,38 +7,27 @@ import com.example.testing.MyApplication;
 import com.example.testing.R;
 import com.example.testing.adapter.EntityAdapter;
 import com.example.testing.jsonTool.EntityDescription;
-import com.example.testing.jsonTool.EntityPractice;
+import com.example.testing.jsonTool.QuestionList;
 import com.example.testing.jsonTool.EntityProperty;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.qmuiteam.qmui.arch.QMUIFragmentActivity;
-import com.qmuiteam.qmui.skin.QMUISkinHelper;
-import com.qmuiteam.qmui.skin.QMUISkinValueBuilder;
-import com.qmuiteam.qmui.skin.SkinWriter;
-import com.qmuiteam.qmui.util.QMUIDisplayHelper;
-import com.qmuiteam.qmui.widget.tab.QMUITabBuilder;
-import com.qmuiteam.qmui.widget.tab.QMUITabIndicator;
-import com.qmuiteam.qmui.widget.tab.QMUITabSegment;
 
-import android.content.Entity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-
-import butterknife.BindView;
 
 public class EntityActivity extends QMUIFragmentActivity {
 
@@ -70,9 +52,8 @@ public class EntityActivity extends QMUIFragmentActivity {
         myApp = (MyApplication) getApplication();
 
 
-        //调用网络接口，获得实体详情页的所有信息
-
-        //向fragment发送消息
+        //TODO：先给前端数据库发请求，看能不能拿到实体详情页的本地缓存
+        //TODO：如果失败，则给后端发送请求，获取实体详情页的缓存信息
 
         // 绑定元件
         TextView textView = findViewById(R.id.entity_header);
@@ -86,43 +67,41 @@ public class EntityActivity extends QMUIFragmentActivity {
         tabs.setViewPager(pager);
         tabs.setTextSize(35);
         ImageView star = findViewById(R.id.star);
+        ImageView share = findViewById(R.id.share);
 
         // 添加动作
         textView.setText(label);
         textView.setTextSize(30);
 
-        //TODO：看这个item是不是已经被收藏了
-        if(myApp.checkStarEntity(uri, subject) == true)
-        {
+        if (myApp.checkStarEntity(uri, subject) == true) {
             myTasksDrawable = star.getDrawable();
             myTasksDrawable.setTint(getResources().getColor(R.color.yellow));
             isStarred = true;
         }
 
         //绑定收藏监听器
-        //TODO:向后端发送请求
+        //TODO:向后端发送收藏信息更新请求
         star.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                if(isStarred == false) {
+                if (isStarred == false) {
                     myTasksDrawable = star.getDrawable();
                     myTasksDrawable.setTint(getResources().getColor(R.color.yellow));
                     isStarred = true;
                     //缓存到本地
                     myApp.addStarLabel(label);
-                    myApp.addStarUrl(uri);
+                    myApp.addStarUri(uri);
                     myApp.addStarSubject(subject);
 
-                }
-                else {
+                } else {
                     myTasksDrawable = star.getDrawable();
                     myTasksDrawable.setTint(getResources().getColor(R.color.gray));
                     isStarred = false;
                     //缓存到本地
                     int i = myApp.findId(uri, subject);
                     myApp.removeStarLabel(i);
-                    myApp.removeStarUrl(i);
+                    myApp.removeStarUri(i);
                     myApp.removeStarSubject(i);
                 }
             }
@@ -133,6 +112,38 @@ public class EntityActivity extends QMUIFragmentActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        //分享功能
+        //当imageView被点击时显示：
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog ShareDialog = new Dialog(EntityActivity.this, R.style.my_dialog);
+                LinearLayout root = (LinearLayout) LayoutInflater.from(EntityActivity.this).inflate(R.layout.share, null);
+
+                TextView content = root.findViewById(R.id.content);
+                //取消按钮
+                root.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ShareDialog.dismiss();
+                    }
+                });
+                ShareDialog.setContentView(root);
+                Window dialogWindow = ShareDialog.getWindow();
+                dialogWindow.setGravity(Gravity.BOTTOM);
+                dialogWindow.setWindowAnimations(R.style.dialogstyle); // 添加动画
+                WindowManager.LayoutParams lp = dialogWindow.getAttributes(); // 获取对话框当前的参数值
+                lp.x = 0; // 新位置X坐标
+                lp.y = -40; // 新位置Y坐标
+                lp.width = (int) getResources().getDisplayMetrics().widthPixels; // 宽度
+                root.measure(0, 0);
+                lp.height = root.getMeasuredHeight();
+                lp.alpha = 9f; // 透明度
+                dialogWindow.setAttributes(lp);
+                ShareDialog.show();
             }
         });
 
@@ -261,7 +272,7 @@ public class EntityActivity extends QMUIFragmentActivity {
         return result;
     }
 
-    public ArrayList<EntityPractice> getPractice()
+    public ArrayList<QuestionList> getPractice()
     {
         String jsonData = "[{\n" +
                 "\t\"answer\": \"B\",\n" +
@@ -337,67 +348,67 @@ public class EntityActivity extends QMUIFragmentActivity {
 
         ArrayList<String> tmp = new ArrayList<>();
         Gson gson = new Gson();
-        ArrayList<EntityPractice> list = gson.fromJson(jsonData,new TypeToken<List<EntityPractice>>(){}.getType());
+        ArrayList<QuestionList> list = gson.fromJson(jsonData,new TypeToken<List<QuestionList>>(){}.getType());
         return list;
     }
 
     public ArrayList<String> getQuestions()
     {
-        ArrayList<EntityPractice> list = getPractice();
+        ArrayList<QuestionList> list = getPractice();
         ArrayList<String> tmp = new ArrayList<>();
-        for(EntityPractice entityPractice: list)
+        for(QuestionList questionList : list)
         {
-            tmp.add(entityPractice.getBody());
+            tmp.add(questionList.getBody());
         }
         return tmp;
     }
     public ArrayList<String> getAnswer()
     {
-        ArrayList<EntityPractice> list = getPractice();
+        ArrayList<QuestionList> list = getPractice();
         ArrayList<String> tmp = new ArrayList<>();
-        for(EntityPractice entityPractice: list)
+        for(QuestionList questionList : list)
         {
-            tmp.add(entityPractice.getAnswer());
+            tmp.add(questionList.getAnswer());
         }
         return tmp;
     }
     public ArrayList<String> getBranchA()
     {
-        ArrayList<EntityPractice> list = getPractice();
+        ArrayList<QuestionList> list = getPractice();
         ArrayList<String> tmp = new ArrayList<>();
-        for(EntityPractice entityPractice: list)
+        for(QuestionList questionList : list)
         {
-            tmp.add(entityPractice.getBranchA());
+            tmp.add(questionList.getBranchA());
         }
         return tmp;
     }
     public ArrayList<String> getBranchB()
     {
-        ArrayList<EntityPractice> list = getPractice();
+        ArrayList<QuestionList> list = getPractice();
         ArrayList<String> tmp = new ArrayList<>();
-        for(EntityPractice entityPractice: list)
+        for(QuestionList questionList : list)
         {
-            tmp.add(entityPractice.getBranchB());
+            tmp.add(questionList.getBranchB());
         }
         return tmp;
     }
     public ArrayList<String> getBranchC()
     {
-        ArrayList<EntityPractice> list = getPractice();
+        ArrayList<QuestionList> list = getPractice();
         ArrayList<String> tmp = new ArrayList<>();
-        for(EntityPractice entityPractice: list)
+        for(QuestionList questionList : list)
         {
-            tmp.add(entityPractice.getBranchC());
+            tmp.add(questionList.getBranchC());
         }
         return tmp;
     }
     public ArrayList<String> getBranchD()
     {
-        ArrayList<EntityPractice> list = getPractice();
+        ArrayList<QuestionList> list = getPractice();
         ArrayList<String> tmp = new ArrayList<>();
-        for(EntityPractice entityPractice: list)
+        for(QuestionList questionList : list)
         {
-            tmp.add(entityPractice.getBranchD());
+            tmp.add(questionList.getBranchD());
         }
         return tmp;
     }

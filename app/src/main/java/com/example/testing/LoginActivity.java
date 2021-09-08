@@ -34,7 +34,8 @@ public class LoginActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -155,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
                     subject.add(listEntity.getSubject());
                 }
                 myApp.setStarLabel(label);
-                myApp.setStarUrl(uri);
+                myApp.setStarUri(uri);
                 myApp.setStarSubject(subject);
 
                 //访问过的列表:
@@ -169,7 +170,7 @@ public class LoginActivity extends AppCompatActivity {
                     subject.add(listEntity.getSubject());
                 }
                 myApp.setHistoryLabel(label);
-                myApp.setHistoryUrl(uri);
+                myApp.setHistoryUri(uri);
                 myApp.setHistorySubject(subject);
 
                 //TODO:访问过的实体

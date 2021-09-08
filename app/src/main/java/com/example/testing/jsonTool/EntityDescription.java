@@ -1,8 +1,10 @@
 package com.example.testing.jsonTool;
 
+import com.example.testing.activity.EntityActivity;
+
 /**
- * 定义一个Bean
- * [{
+ *    "description" : //来自接口8的内容（鉴于接口8不稳定，后端可以考虑在超时的情况下没有这个字段）
+ *         [{
  * 			'feature_key': '下属于',
  * 			'feature_value': '整式方程'
  *                }, {
@@ -36,47 +38,37 @@ package com.example.testing.jsonTool;
  * 			'feature_key': '性质9',
  * 			'feature_value': '一元二次方程ax^2＋bx＋c=0（a≠0）,当Δ=b^2－4ac=0时，方程有两个相等的实数根'
  *        }, {
- * 			'feature_key': '性质10',
- * 			'feature_value': '一元二次方程ax^2＋bx＋c=0（a≠0）,当Δ=b^2－4ac＜0时，方程没有实数根'
- *        }, {
- * 			'feature_key': '性质11',
- * 			'feature_value': '公式法解一元二次方程的一般步骤：（1）将一元二次方程整理成一般形式；（2）确定公式中a，b，c的值；（3）求出b2－4ac的值；（4）当b2－4ac≥0时，将a，b，c的值及b2－4ac的值代入求根公式即可；当b2－4ac＜0时，方程无实数根'
- *        }, {
- * 			'feature_key': '性质12',
- * 			'feature_value': '因式分解法解一元二次方程的一般步骤（1）将方程的右边化为0；（2）将方程的左边分解为两个一次因式的乘积；（3）令每个因式分别为零，得到两个一元一次方程；（4）解这两个一元一次方程，它们的解就是原方程的解'
- *        }, {
- * 			'feature_key': '性质13',
- * 			'feature_value': '如果ax^2＋bx＋c=0（a≠0）的两个实数根是x1，x2，那么x1＋x2=－b/a，x1x2=c/a'
- *        }, {
- * 			'feature_key': '性质14',
- * 			'feature_value': '如果方程x^2＋px＋q=0的两个根是x1，x2，那么x1＋x2=－p，x1x2=q'
- *        }, {
- * 			'feature_key': '性质15',
- * 			'feature_value': '以两个数x1，x2为根的一元二次方程（二次项系数为1）是x^2－（x1＋x2）x＋x1x2=0'
- *  }]
- *
+ * // ...
+ *             ]
  *
  */
 public class EntityDescription {
     private String feature_key;
     private String feature_value;
 
-    public void setLabel(String key){
-        this.feature_key=key;
+    //构造函数
+    EntityDescription(String feature_key, String feature_value){
+        this.feature_key = feature_key;
+        this.feature_value = feature_value;
     }
 
-    public void setUrl(String value){
+    //set 函数
+    public void setFeature_key(String key){
+        this.feature_key=key;
+    }
+    public void setFeature_value(String value){
         this.feature_value=value;
     }
 
+    //get 函数
     public String getFeature_key(){
         return feature_key;
     }
-
     public String getFeature_value(){
         return feature_value;
     }
 
+    //展示
     public void show(){
         System.out.println("feature_key="+feature_key);
         System.out.println("feature_value="+feature_value);

@@ -2,13 +2,11 @@ package com.example.testing;
 
 
 import android.app.Application;
-import android.content.Entity;
-import android.util.EventLogTags;
 
 import com.example.testing.jsonTool.EntityDescription;
-import com.example.testing.jsonTool.EntityPractice;
+import com.example.testing.jsonTool.QuestionList;
 import com.example.testing.jsonTool.EntityProperty;
-import com.example.testing.jsonTool.EntityRelation;
+import com.example.testing.jsonTool.EntityContent1;
 import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
 
 import java.util.ArrayList;
@@ -39,10 +37,10 @@ public class MyApplication extends Application {
     }
 
     /** 存储的历史访问实体列表
-     *  {label, url, subject} 三元组
+     *  {label, uri, subject} 三元组
      */
     ArrayList<String> historyLabel;
-    ArrayList<String> historyUrl;
+    ArrayList<String> historyUri;
     ArrayList<String> historySubject;
 
     //set方法：login/register后初始化用
@@ -50,9 +48,9 @@ public class MyApplication extends Application {
     {
         historyLabel = s;
     }
-    public void setHistoryUrl(ArrayList<String> s)
+    public void setHistoryUri(ArrayList<String> s)
     {
-        historyUrl = s;
+        historyUri = s;
     }
     public void setHistorySubject(ArrayList<String> s)
     {
@@ -63,9 +61,9 @@ public class MyApplication extends Application {
     {
         return historyLabel;
     }
-    public ArrayList<String> getHistoryUrl()
+    public ArrayList<String> getHistoryUri()
     {
-        return historyUrl;
+        return historyUri;
     }
     public ArrayList<String> getHistorySubject()
     {
@@ -76,9 +74,9 @@ public class MyApplication extends Application {
     {
         historyLabel.add(label);
     }
-    public void addUrl(String Url)
+    public void addUri(String Uri)
     {
-        historyUrl.add(Url);
+        historyUri.add(Uri);
     }
     public void addSubject(String subject)
     {
@@ -90,11 +88,11 @@ public class MyApplication extends Application {
         System.out.println("star: ");
         System.out.println(uri);
         System.out.println(subject);
-        for(int i = 0;i < starUrl.size();i++)
+        for(int i = 0;i < starUri.size();i++)
         {
-            System.out.println(starUrl.get(i));
+            System.out.println(starUri.get(i));
             System.out.println(starSubject.get(i));
-            if(starUrl.get(i).equals(uri))
+            if(starUri.get(i).equals(uri))
             {
                 System.out.println("yes");
                 if(SUBJECT2INT.get(starSubject.get(i)) == SUBJECT2INT.get(subject))
@@ -106,10 +104,10 @@ public class MyApplication extends Application {
 
 
     /** 收藏实体列表
-     *  {label, url, subject} 三元组
+     *  {label, uri, subject} 三元组
      */
     ArrayList<String> starLabel;
-    ArrayList<String> starUrl;
+    ArrayList<String> starUri;
     ArrayList<String> starSubject;
 
     //set方法：login/register后初始化用
@@ -117,9 +115,9 @@ public class MyApplication extends Application {
     {
         starLabel = s;
     }
-    public void setStarUrl(ArrayList<String> s)
+    public void setStarUri(ArrayList<String> s)
     {
-        starUrl = s;
+        starUri = s;
     }
     public void setStarSubject(ArrayList<String> s)
     {
@@ -130,9 +128,9 @@ public class MyApplication extends Application {
     {
         return starLabel;
     }
-    public ArrayList<String> getStarUrl()
+    public ArrayList<String> getStarUri()
     {
-        return starUrl;
+        return starUri;
     }
     public ArrayList<String> getStarSubject()
     {
@@ -143,20 +141,20 @@ public class MyApplication extends Application {
     {
         starLabel.add(label);
     }
-    public void addStarUrl(String Url)
+    public void addStarUri(String Uri)
     {
-        starUrl.add(Url);
+        starUri.add(Uri);
     }
     public void addStarSubject(String subject)
     {
         starSubject.add(subject);
     }
     //remove方法：用户删除某一收藏对象
-    public int findId(String t_url, String t_subject)
+    public int findId(String t_uri, String t_subject)
     {
-        for(int i = 0;i < starUrl.size();i++)
+        for(int i = 0;i < starUri.size();i++)
         {
-            if(starUrl.get(i).equals(t_url))
+            if(starUri.get(i).equals(t_uri))
             {
                 if(SUBJECT2INT.get(starSubject.get(i)) == SUBJECT2INT.get(t_subject))
                     return i;
@@ -168,9 +166,9 @@ public class MyApplication extends Application {
     {
         starLabel.remove(i);
     }
-    public void removeStarUrl(int i)
+    public void removeStarUri(int i)
     {
-        starUrl.remove(i);;
+        starUri.remove(i);;
     }
     public void removeStarSubject(int i)
     {
@@ -183,11 +181,11 @@ public class MyApplication extends Application {
         System.out.println("star: ");
         System.out.println(uri);
         System.out.println(subject);
-        for(int i = 0;i < starUrl.size();i++)
+        for(int i = 0;i < starUri.size();i++)
         {
-            System.out.println(starUrl.get(i));
+            System.out.println(starUri.get(i));
             System.out.println(starSubject.get(i));
-            if(starUrl.get(i).equals(uri))
+            if(starUri.get(i).equals(uri))
             {
                 System.out.println("yes");
                 if(SUBJECT2INT.get(starSubject.get(i)) == SUBJECT2INT.get(subject))
@@ -202,8 +200,8 @@ public class MyApplication extends Application {
      */
     ArrayList<EntityDescription> description;
     ArrayList<EntityProperty> property;
-    ArrayList<EntityRelation> relation;
-    ArrayList<EntityPractice> practice;
+    ArrayList<EntityContent1> relation;
+    ArrayList<QuestionList> practice;
     //set方法：login/register后初始化用
     public void setDescription(ArrayList<EntityDescription> description)
     {
@@ -213,11 +211,11 @@ public class MyApplication extends Application {
     {
         this.property = s;
     }
-    public void setRelation(ArrayList<EntityRelation> s)
+    public void setRelation(ArrayList<EntityContent1> s)
     {
         this.relation= s;
     }
-    public void setPractice(ArrayList<EntityPractice> s)
+    public void setPractice(ArrayList<QuestionList> s)
     {
         this.practice= s;
     }
@@ -231,11 +229,11 @@ public class MyApplication extends Application {
     {
         return property.get(pos);
     }
-    public EntityRelation getRelation(int pos)
+    public EntityContent1 getRelation(int pos)
     {
         return relation.get(pos);
     }
-    public EntityPractice getPractice(int pos)
+    public QuestionList getPractice(int pos)
     {
         return practice.get(pos);
     }
@@ -249,11 +247,11 @@ public class MyApplication extends Application {
     {
         property.add(s);
     }
-    public void addRelation(EntityRelation s)
+    public void addRelation(EntityContent1 s)
     {
         relation.add(s);
     }
-    public void addPractice(EntityPractice s)
+    public void addPractice(QuestionList s)
     {
         practice.add(s);
     }

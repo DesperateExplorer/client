@@ -55,7 +55,7 @@
       android:id="@+id/textView5"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="该手机号已被注册！"
+      android:text="该用户名已被注册！请更换！"
       android:textColor="@color/red"
       android:textSize="13dp"
       android:textStyle="normal"

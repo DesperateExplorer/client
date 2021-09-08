@@ -80,14 +80,20 @@ public class ListEntity {
     private String uri;
     private String subject;
 
+    //构造函数
+    ListEntity(String label, String uri, String subject)
+    {
+        this.label = label;
+        this.uri = uri;
+        this.subject = subject;
+    }
+
     public void setLabel(String s){
         this.label = s;
     }
-
-    public void setUrl(String s){
+    public void setUri(String s){
         this.uri = s;
     }
-
     public void setSubject(String s){
         this.subject = s;
     }
@@ -101,5 +107,6 @@ public class ListEntity {
     public String getSubject(){
         return subject;
     }
+
 
 }

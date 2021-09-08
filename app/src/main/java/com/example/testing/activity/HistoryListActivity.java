@@ -3,6 +3,7 @@ package com.example.testing.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,9 +16,11 @@ import com.example.testing.MyApplication;
 import com.example.testing.R;
 import com.example.testing.SearchActivity;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class StarListActivity extends AppCompatActivity {
+
+public class HistoryListActivity extends AppCompatActivity {
 
     MyApplication myApp;
     private BaseAdapter adapter;
@@ -25,17 +28,17 @@ public class StarListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_star_list);
+        setContentView(R.layout.activity_history_list);
 
         //绑定组件
-        ListView listView = findViewById(R.id.starList_listView);
-        ImageView imageView = findViewById(R.id.starlist_back);
+        ListView listView = findViewById(R.id.historyList_listView);
+        ImageView imageView = findViewById(R.id.historylist_back);
         myApp = (MyApplication) getApplication();
-        ArrayList<String> label = myApp.getStarLabel();
-        ArrayList<String> uri = myApp.getStarUri();
-        ArrayList<String> subject = myApp.getStarSubject();
+        ArrayList<String> label = myApp.getHistoryLabel();
+        ArrayList<String> uri = myApp.getHistoryUri();
+        ArrayList<String> Subject = myApp.getHistorySubject();
 
-        adapter = new ArrayAdapter<String>(StarListActivity.this, android.R.layout.simple_list_item_1, label);
+        adapter = new ArrayAdapter<String>(HistoryListActivity.this, android.R.layout.simple_list_item_1, label);
         listView.setAdapter(adapter);
 
         //跳转到实体详情页上,可以复用实体详情页activity界面
@@ -43,20 +46,20 @@ public class StarListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //TODO：label，subject 获得实体详情页的json
-                Intent intent = new Intent(StarListActivity.this,EntityActivity.class);
+                Intent intent = new Intent(HistoryListActivity.this,EntityActivity.class);
                 intent.putExtra("label", label.get(i));
                 intent.putExtra("uri", uri.get(i));
-                intent.putExtra("subject", subject.get(i));
+                intent.putExtra("subject", Subject.get(i));
                 startActivity(intent);
             }
         });
 
-        //设置返回监听器
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+
     }
 }
