@@ -40,7 +40,7 @@
       android:id="@+id/textView3"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="请输入手机号："
+      android:text="请输入用户名："
       android:textColor="@color/gray"
       android:textSize="23dp"
       android:textStyle="normal"
@@ -100,7 +100,7 @@
       app:layout_constraintVertical_bias="0.544" />
 
   <Button
-      android:id="@+id/button2"
+      android:id="@+id/register_confirm"
       android:layout_width="141dp"
       android:layout_height="54dp"
       android:background="@drawable/button"
