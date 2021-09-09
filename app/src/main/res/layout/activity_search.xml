@@ -22,7 +22,7 @@
             app:searchBlockColor="@color/light_gray"
             app:searchBlockHeight="150"
             app:textColorSearch="#9b9b9b"
-            app:textHintSearch="输入一段文本"
+            app:textHintSearch="请输入关键词"
             app:textSizeSearch="10dp">
 
         </scut.carson_ho.searchview.SearchView>

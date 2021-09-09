@@ -44,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         backButton = findViewById(R.id.BackButton);
         button = findViewById(R.id.register_confirm);
+
         username = findViewById(R.id.Userid_edit_text);
         password = findViewById(R.id.Password_edit_text);
         _thisActivity = this;
@@ -52,8 +53,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-//                TODO：发送Username和password（已完成，待测试）
-//                TODO：加（二次）验证密码+TODO：加入global variable，记录当前用户的id（未完成！）
+//                TODO_OK：发送Username和password（已完成，已测试）
+//                TODO：加（二次）验证密码+TODO（未完成！）
                 myapp = (MyApplication) getApplication();
 
                 String userId = username.getText().toString();
@@ -114,12 +115,14 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        backButton.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: 如何从RegisterActivity回到开始的页面
+                Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                startActivity(intent);
             }
         });
+
     }
 
 

@@ -279,6 +279,7 @@ public class HomeFragment extends QMUIFragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), SetSubjectActivity.class);
                 startActivity(intent);
+
             }
         });
 
@@ -311,7 +312,7 @@ public class HomeFragment extends QMUIFragment {
         mTabSegment.notifyDataChanged();
         currentSubject = getSubject.get(mSubjectList.get(0));
 
-        System.out.println("current Item Count:"+mCurrentItemCount);
+        System.out.println("current Item Count:" + mCurrentItemCount);
         int space = QMUIDisplayHelper.dp2px(getContext(), 16);
         mTabSegment.setIndicator(new QMUITabIndicator(
                 QMUIDisplayHelper.dp2px(getContext(), 2), false, true));
@@ -322,23 +323,25 @@ public class HomeFragment extends QMUIFragment {
         mTabSegment.addOnTabSelectedListener(new QMUITabSegment.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int index) {
-                Toast.makeText(getContext(), "select index " + index, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "select index " + index, Toast.LENGTH_SHORT).show();
                 currentSubject = getSubject.get(mSubjectList.get(index));
+                //Toast.makeText(getContext(), "select index " + index, Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onTabUnselected(int index) {
-                Toast.makeText(getContext(), "unSelect index " + index, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "unSelect index " + index, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onTabReselected(int index) {
-                Toast.makeText(getContext(), "reSelect index " + index, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "reSelect index " + index, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onDoubleTap(int index) {
-                Toast.makeText(getContext(), "double tap index " + index, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "double tap index " + index, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -350,30 +353,31 @@ public class HomeFragment extends QMUIFragment {
         if (view == null) {
             View newView = getLayoutInflater().inflate(R.layout.list_view,null);
 
-            //设置list view的内容
-            //ListView listView = (ListView) newView.findViewById(R.id.listView);
-            ListView listView = new ListView(getContext());
-
-            MyApplication myapp = (MyApplication) getActivity().getApplication();
-            ArrayList<String> history_label = myapp.getHistoryLabel();
-            ArrayList<String> history_subject = myapp.getHistorySubject();
-            int pos;
-
-            //准备在listview中展示的数据格式
-            final List listmap = new ArrayList<>();
-            for (int counter = 0; counter < history_label.size() && counter < history_subject.size(); counter++) {
-                Map map = new HashMap();
-                System.out.println(getInt.get(currentSubject));
-                System.out.println(getInt.get(history_subject.get(counter)));
-                if(position == getInt.get(history_subject.get(counter))) {
-                    System.out.println("yes!");
-                    map.put("label", history_label.get(counter));
-                    map.put("subject", history_subject.get(counter));
-                    listmap.add(map);
-                }
-            }
-            adapter = new SimpleAdapter(getContext(), listmap , android.R.layout.simple_list_item_2, new String[]{"label","subject"},new int[]{android.R.id.text1,android.R.id.text2});
-            listView.setAdapter(adapter);
+//            //设置list view的内容
+//            //ListView listView = (ListView) newView.findViewById(R.id.listView);
+//            ListView listView = new ListView(getContext());
+//
+//            MyApplication myapp = (MyApplication) getActivity().getApplication();
+//            ArrayList<String> history_label = myapp.getHistoryLabel();
+//            System.out.println(history_label);
+//            ArrayList<String> history_subject = myapp.getHistorySubject();
+//            System.out.println(history_subject);
+//            int pos;
+//
+//            //准备在listview中展示的数据格式
+//            final List listmap = new ArrayList<>();
+//            for (int counter = 0; counter < history_label.size() && counter < history_subject.size(); counter++) {
+//                Map map = new HashMap();
+//                System.out.println(getInt.get(currentSubject));
+//                System.out.println(getInt.get(history_subject.get(counter)));
+//                if(position == getInt.get(history_subject.get(counter))) {
+//                    map.put("label", history_label.get(counter));
+//                    map.put("subject", history_subject.get(counter));
+//                    listmap.add(map);
+//                }
+//            }
+//            adapter = new SimpleAdapter(getContext(), listmap , android.R.layout.simple_list_item_2, new String[]{"label","subject"},new int[]{android.R.id.text1,android.R.id.text2});
+//            listView.setAdapter(adapter);
 
 //            TextView textView = new TextView(getContext());
 //            textView.setGravity(Gravity.CENTER);
@@ -392,7 +396,7 @@ public class HomeFragment extends QMUIFragment {
 //                    QDSchemeManager.getInstance().handle("qmui://tab?mode=2&name=xixi");
 //                }
 //            });
-            view = listView;
+            view = newView;
             mPageMap.put(page, view);
         }
         return view;

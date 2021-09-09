@@ -72,23 +72,11 @@ public class LoginActivity extends AppCompatActivity {
                         "\t\"label\": \"高原山地气候\",\n" +
                         "\t\"uri\": \"http://edukb.org/knowledge/0.1/instance/geo#-00394d65c2457f426594cadeb580c0d2\",\n" +
                         "\t\"subject\": \"地理\"\n" +"}, {\n" +
-                        "\t\"label\": \"帕米尔高原\",\n" +
-                        "\t\"uri\": \"http://edukb.org/knowledge/0.1/instance/geo#-02f4536779809332f1b5d983a62d7f56\",\n" +
-                        "\t\"subject\": \"地理\"\n" +"}, {\n" +
                         "\t\"label\": \"青藏高原湖区\",\n" +
                         "\t\"uri\": \"http://edukb.org/knowledge/0.1/instance/geo#-04449fbfae465d7b992e2a6793966058\",\n" +
                         "\t\"subject\": \"地理\"\n" +"}, {\n" +
-                        "\t\"label\": \"黄土高原\",\n" +
-                        "\t\"uri\": \"http://edukb.org/knowledge/0.1/instance/geo#-0572e26c53bb893644c2ef0fbdc4fd5f\",\n" +
-                        "\t\"subject\": \"地理\"\n" +"}, {\n" +
-                        "\t\"label\": \"高原山地气候\",\n" +
-                        "\t\"uri\": \"http://edukb.org/knowledge/0.1/instance/geo#-07831daaee3979437343286fa86ea5fc\",\n" +
-                        "\t\"subject\": \"地理\"\n" +"}, {\n" +
                         "\t\"label\": \"青藏高原区\",\n" +
                         "\t\"uri\": \"http://edukb.org/knowledge/0.1/instance/geo#-08d8377b7756d4a741841ad2353753c9\",\n" +
-                        "\t\"subject\": \"地理\"\n" +"}, {\n" +
-                        "\t\"label\": \"内蒙古高原\",\n" +
-                        "\t\"uri\": \"http://edukb.org/knowledge/0.1/instance/geo#-13a1db4c3bd7cb738f29c2155d63ff80\",\n" +
                         "\t\"subject\": \"地理\"\n" +"}, {\n" +
                         "\t\"label\": \"高原\",\n" +
                         "\t\"uri\": \"http://edukb.org/knowledge/0.1/instance/geo#-182df86eeea94e47f4eeb25f482a26ea\",\n" +
