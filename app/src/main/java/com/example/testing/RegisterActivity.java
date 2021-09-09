@@ -1,7 +1,9 @@
 package com.example.testing;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +17,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.io.IOException;
+import java.lang.Runnable;
 
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -25,12 +28,14 @@ import okhttp3.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    ImageView backButton;
-    Button button;
-    EditText username;
-    EditText password;
+    private ImageView backButton;
+    private Button button;
+    private EditText username;
+    private EditText password;
 //    String userId;
-    MyApplication myapp;
+    public MyApplication myapp;
+
+    private Activity _thisActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
         button = findViewById(R.id.register_confirm);
         username = findViewById(R.id.Userid_edit_text);
         password = findViewById(R.id.Password_edit_text);
+        _thisActivity = this;
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
                 call.enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
-                        System.err.println("Register: network failed");
+                        System.err.println("Register: " + e.getMessage());
                     }
 
                     @Override
@@ -83,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                             JsonObject jsonObject = JsonParser.parseString(codeText).getAsJsonObject();
                             int code = jsonObject.get("code").getAsInt();
 
-                            runOnUiThread(new Runnable() {
+                            _thisActivity.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     username.getText().clear();
@@ -92,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), "注册成功", Toast.LENGTH_SHORT).show();
                                         myapp.setUsername(userId);
                                         Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
-                                        startActivity(intent);
+                                        _thisActivity.startActivity(intent);
                                     } else {
                                         Toast.makeText(getApplicationContext(), "用户名已存在，注册失败", Toast.LENGTH_SHORT).show();
                                     }
