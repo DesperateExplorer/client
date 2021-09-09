@@ -95,7 +95,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 public void run() {
                                     username.getText().clear();
                                     password.getText().clear();
-                                    if(code == 0) {
+                                    if (userId.isEmpty() || passwordText.isEmpty()) {
+                                        Toast.makeText(getApplicationContext(), "请输入用户名或密码", Toast.LENGTH_SHORT).show();
+                                    } else if(code == 0) {
                                         Toast.makeText(getApplicationContext(), "注册成功", Toast.LENGTH_SHORT).show();
 //                                        myapp.setUsername(userId);
                                         Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);

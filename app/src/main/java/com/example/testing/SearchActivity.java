@@ -43,7 +43,7 @@ public class SearchActivity extends AppCompatActivity {
     ArrayList<SearchListEntity> list;
     ArrayList<String> label = new ArrayList<>();
     ArrayList<String> uri = new ArrayList<>();
-    ArrayList<Integer> visited = new ArrayList<>();
+    ArrayList<Boolean> visited = new ArrayList<>();
 
     // 设置popup Menu
     private void showPopupMenu(View view) {
@@ -192,13 +192,7 @@ public class SearchActivity extends AppCompatActivity {
                 for(String s :uri)
                 {
                     boolean t = myApp.checkEntity(s,currentSubject);
-                    if(t == true){
-                        visited.add(1);
-                    }
-
-                    else {
-                        visited.add(0);
-                    }
+                    visited.add(Boolean.valueOf(t));
                 }
 
 //                BaseAdapter adapter = new ArrayAdapter<String>(SearchActivity.this, android.R.layout.simple_list_item_1, label);

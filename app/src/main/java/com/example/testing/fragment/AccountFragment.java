@@ -76,6 +76,7 @@ public class AccountFragment extends Fragment {
 
         //绑定组件
         ImageView imageView = view.findViewById(R.id.account_icon);
+        // Username
         TextView ID = view.findViewById(R.id.Username);
         MyApplication myapp = (MyApplication) getActivity().getApplication();
         TextView exit = view.findViewById(R.id.exit);

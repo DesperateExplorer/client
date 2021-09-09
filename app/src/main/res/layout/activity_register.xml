@@ -11,7 +11,7 @@
       android:id="@+id/textView2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="注册edukg账户"
+      android:text="注册个人账户"
       android:textColor="@color/gray"
       android:textSize="40dp"
       android:textStyle="bold"
