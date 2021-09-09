@@ -16,6 +16,7 @@ import com.example.testing.MainActivity;
 import com.example.testing.MyApplication;
 import com.example.testing.R;
 import com.example.testing.activity.HistoryListActivity;
+import com.example.testing.activity.KeywordActivity;
 import com.example.testing.activity.StarListActivity;
 
 import org.w3c.dom.Text;
@@ -80,6 +81,7 @@ public class AccountFragment extends Fragment {
         TextView exit = view.findViewById(R.id.exit);
         TextView starList = view.findViewById(R.id.starred);
         TextView historyList = view.findViewById(R.id.history_list);
+        TextView keyword = view.findViewById(R.id.history_keyword);
 
         //设置动作
         ID.setText(myapp.getUsername());
@@ -103,6 +105,14 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), HistoryListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        keyword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), KeywordActivity.class);
                 startActivity(intent);
             }
         });

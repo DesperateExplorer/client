@@ -1,41 +1,58 @@
 package com.example.testing.adapter;
 
 import android.content.Context;
+import android.telephony.TelephonyCallback;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
+
+import com.example.testing.MyApplication;
 import com.example.testing.R;
 import com.example.testing.jsonTool.SearchListEntity;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
-public class SearchListAdapter extends BaseAdapter {
+public class SearchListAdapter extends ArrayAdapter<String> {
 
     private ArrayList<SearchListEntity> Data;
+    private ArrayList<String> label;
     private Context Context;
     private int mCurrentItem = 0;
     private boolean isClick = false;
+    @LayoutRes int res;
+    private ArrayList<Integer> visited;
 
-    public SearchListAdapter(Context sContext, ArrayList<SearchListEntity> ssData, yout) {
-        this.Data = ssData;
+    public SearchListAdapter(Context sContext, ArrayList<String> label, ArrayList<SearchListEntity> Data, ArrayList<Integer> visited, @LayoutRes int res) {
+        super(sContext,res,label);
+        this.label = label;
+        this.Data = Data;
         this.Context = sContext;
+        this.res = res;
+        this.visited = visited;
+
     }
 
-    public SearchListAdapter() {
+    private static class ViewHolder
+    {
+        TextView search_list_title;
     }
 
     @Override
-
     public int getCount() {
         return Data.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        return position;
+    public String getItem(int position) {
+        return label.get(position);
     }
 
     @Override
@@ -46,35 +63,23 @@ public class SearchListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(Context).inflate(R.layout.sj_single, parent, false);
+//            convertView = LayoutInflater.from(Context).inflate(R.layout.sj_single, parent, false);
+            convertView = LayoutInflater.from(Context).inflate(res, parent, false);
         }
-        TextView sTime = (TextView) convertView.findViewById(R.id.stime);
-        TextView sName = (TextView) convertView.findViewById(R.id.name);
-        TextView sNumber = (TextView) convertView.findViewById(R.id.number);
+        TextView textView = (TextView) convertView.findViewById(R.id.search_list_title);
 
-        sTime.setText(ssData.get(position).getTime());
-        sName.setText(ssData.get(position).getName());
-        sNumber.setText(ssData.get(position).getNumber());
-
-        /*
-         *这个进行判断mCurrentItem=行号，isClick是否点击
-         */
-        if (mCurrentItem == position && isClick) {
-            convertView.setBackgroundColor(Color.parseColor("#FFEFDB"));
-            sTime.setTextColor(Color.parseColor("#9933cc"));
-        } else {
-            convertView.setBackgroundColor(Color.parseColor("#ffffff"));
-            sTime.setTextColor(Color.parseColor("#000000"));
+        if(visited.get(position) == 1)
+        {
+            textView.setTextColor(0xff5F5E5E);
+        }
+        else {
+            textView.setTextColor(0xff000000);
         }
 
-
+        textView.setText(label.get(position));
         return convertView;
     }
 
-    //获取行号
-    public void setCurrentItem(int currentItem) {
-        this.mCurrentItem = currentItem;
-    }
 
     //是否点击
     public void setClick(boolean click) {

@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".activity.KeywordActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.HistoryListActivity"
             android:exported="true" />
         <activity

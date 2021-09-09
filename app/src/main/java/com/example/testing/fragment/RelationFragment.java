@@ -7,8 +7,19 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import com.example.testing.R;
+import com.example.testing.activity.EntityActivity;
+import com.example.testing.adapter.RelationAdapter;
+import com.example.testing.jsonTool.ShowRelation;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +36,7 @@ public class RelationFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    ListView listView;
 
     public RelationFragment() {
         // Required empty public constructor
@@ -61,6 +73,22 @@ public class RelationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_relation, container, false);
+        View view =  inflater.inflate(R.layout.fragment_relation, container, false);
+
+        //绑定组件
+        listView = (ListView)view.findViewById(R.id.relation_listView);
+
+        ArrayList<ShowRelation> Data = new ArrayList<>();
+        Data.add(new ShowRelation("predicate","subject","object"));
+
+        //获得变量的值:从content1获取 subject 和 predicate
+
+        //从content2 获取 predicate 和 object
+
+        //在listView中显示出来
+        RelationAdapter adapter = new RelationAdapter(getContext(), Data, R.layout.relation_item);
+        listView.setAdapter(adapter);
+
+        return view;
     }
 }

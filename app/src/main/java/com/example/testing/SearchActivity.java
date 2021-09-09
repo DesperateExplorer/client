@@ -2,6 +2,7 @@ package com.example.testing;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.testing.activity.EntityActivity;
+import com.example.testing.adapter.SearchListAdapter;
 import com.example.testing.jsonTool.ListEntity;
 import com.example.testing.jsonTool.SearchListEntity;
 import com.google.gson.Gson;
@@ -34,10 +35,15 @@ public class SearchActivity extends AppCompatActivity {
     private ArrayList<String> result = new ArrayList<>();
 
     private ListView listView;
-    private BaseAdapter adapter;
+//    private BaseAdapter adapter;
     private int counter;
     String sort;
     String currentSubject;
+    MyApplication myApp;
+    ArrayList<SearchListEntity> list;
+    ArrayList<String> label = new ArrayList<>();
+    ArrayList<String> uri = new ArrayList<>();
+    ArrayList<Integer> visited = new ArrayList<>();
 
     // 设置popup Menu
     private void showPopupMenu(View view) {
@@ -91,6 +97,9 @@ public class SearchActivity extends AppCompatActivity {
                 currentSubject = intent.getStringExtra("subject");
                 System.out.println("search activity: "+currentSubject);
                 //sort: 本文件声明的sort
+
+                //把string写入本地缓存
+                ((MyApplication)getApplication()).addKeyWord(string);
 
                 //得到的结果
                 String jsonData = "[{\n" +
@@ -168,18 +177,34 @@ public class SearchActivity extends AppCompatActivity {
                         "}]";
 
                 Gson gson = new Gson();
-                List<SearchListEntity> list = gson.fromJson(jsonData,new TypeToken<List<SearchListEntity>>(){}.getType());
-                ArrayList<String> label = new ArrayList<>();
-                ArrayList<String> uri = new ArrayList<>();
+                list = gson.fromJson(jsonData,new TypeToken<List<SearchListEntity>>(){}.getType());
+                label = new ArrayList<>();
+                uri = new ArrayList<>();
+                visited = new ArrayList<>();
+
                 for(SearchListEntity searchListEntity: list){
                     label.add(searchListEntity.getLabel());
                     uri.add(searchListEntity.getUri());
                 }
 
-                counter = 0;
-                int oldCounter = counter;
+                myApp = (MyApplication) getApplication();
+                //检查当前实体是不是已经被访问
+                for(String s :uri)
+                {
+                    boolean t = myApp.checkEntity(s,currentSubject);
+                    if(t == true){
+                        visited.add(1);
+                    }
 
-                adapter = new ArrayAdapter<String>(SearchActivity.this, android.R.layout.simple_list_item_1, label);
+                    else {
+                        visited.add(0);
+                    }
+                }
+
+//                BaseAdapter adapter = new ArrayAdapter<String>(SearchActivity.this, android.R.layout.simple_list_item_1, label);
+//                listView.setAdapter(adapter);
+
+                SearchListAdapter adapter = new SearchListAdapter(SearchActivity.this, label, list, visited, R.layout.item);
                 listView.setAdapter(adapter);
 
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -187,6 +212,17 @@ public class SearchActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         //TODO：label，subject 获得实体详情页的json
                         Intent intent = new Intent(SearchActivity.this,EntityActivity.class);
+
+                        //加入访问列表
+                        myApp.addLabel(label.get(i));
+                        myApp.addUri(uri.get(i));
+                        myApp.addSubject(currentSubject);
+                        System.out.println(currentSubject);
+                        visited.set(i,1);
+
+                        //告诉adapter
+                        adapter.notifyDataSetChanged();
+
                         intent.putExtra("label", label.get(i));
                         intent.putExtra("uri", uri.get(i));
                         intent.putExtra("subject", currentSubject);
@@ -212,4 +248,5 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
     }
+
 }

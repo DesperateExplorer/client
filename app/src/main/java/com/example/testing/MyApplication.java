@@ -9,6 +9,7 @@ import com.example.testing.jsonTool.EntityProperty;
 import com.example.testing.jsonTool.EntityContent1;
 import com.qmuiteam.qmui.arch.QMUISwipeBackActivityManager;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -72,30 +73,29 @@ public class MyApplication extends Application {
     //add方法：用户有新动作后，更新历史访问记录
     public void addLabel(String label)
     {
-        historyLabel.add(label);
+        historyLabel.add(0,label);
     }
     public void addUri(String Uri)
     {
-        historyUri.add(Uri);
+        historyUri.add(0,Uri);
     }
     public void addSubject(String subject)
     {
-        historySubject.add(subject);
+        historySubject.add(0,subject);
     }
+
     //查找方法：判断某个实体是不是已经被访问过
     public boolean checkEntity(String uri, String subject)
     {
-        System.out.println("star: ");
+        System.out.println("history: ");
         System.out.println(uri);
         System.out.println(subject);
-        for(int i = 0;i < starUri.size();i++)
+        for(int i = 0;i < historyUri.size();i++)
         {
-            System.out.println(starUri.get(i));
-            System.out.println(starSubject.get(i));
-            if(starUri.get(i).equals(uri))
+            if(historyUri.get(i).equals(uri))
             {
                 System.out.println("yes");
-                if(SUBJECT2INT.get(starSubject.get(i)) == SUBJECT2INT.get(subject))
+                if(SUBJECT2INT.get(historySubject.get(i)) == SUBJECT2INT.get(subject))
                     return true;
             }
         }
@@ -284,5 +284,20 @@ public class MyApplication extends Application {
         {
             subjectList.add(i);
         }
+    }
+
+    private ArrayList<String> keyword = new ArrayList<>();
+
+    public void SetKeyWord(ArrayList<String> s)
+    {
+        keyword = s;
+    }
+    public void addKeyWord(String s)
+    {
+        keyword.add(0,s);
+    }
+    public ArrayList<String> getKeyWord()
+    {
+        return keyword;
     }
 }

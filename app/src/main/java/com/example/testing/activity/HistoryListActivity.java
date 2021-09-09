@@ -22,7 +22,6 @@ import java.util.ArrayList;
 
 public class HistoryListActivity extends AppCompatActivity {
 
-    MyApplication myApp;
     private BaseAdapter adapter;
 
     @Override
@@ -33,10 +32,9 @@ public class HistoryListActivity extends AppCompatActivity {
         //绑定组件
         ListView listView = findViewById(R.id.historyList_listView);
         ImageView imageView = findViewById(R.id.historylist_back);
-        myApp = (MyApplication) getApplication();
-        ArrayList<String> label = myApp.getHistoryLabel();
-        ArrayList<String> uri = myApp.getHistoryUri();
-        ArrayList<String> Subject = myApp.getHistorySubject();
+        ArrayList<String> label = ((MyApplication) getApplication()).getHistoryLabel();
+        ArrayList<String> uri = ((MyApplication) getApplication()).getHistoryUri();
+        ArrayList<String> Subject = ((MyApplication) getApplication()).getHistorySubject();
 
         adapter = new ArrayAdapter<String>(HistoryListActivity.this, android.R.layout.simple_list_item_1, label);
         listView.setAdapter(adapter);
