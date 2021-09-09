@@ -44,6 +44,11 @@ public class MyApplication extends Application {
     ArrayList<String> historyUri;
     ArrayList<String> historySubject;
 
+    /**
+     * 网络请求相关
+     */
+    final public String baseUrl = "http://183.172.66.103:8080";
+
     //set方法：login/register后初始化用
     public void setHistoryLabel(ArrayList<String> s)
     {
