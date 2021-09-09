@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/list_default"
+        android:title="默认排序"/>
+
+    <item
         android:id="@+id/url_ascend"
-        android:title="默认升序"/>
+        android:title="升序"/>
 
     <item
         android:id="@+id/url_descend"
-        android:title="默认降序"/>
+        android:title="降序"/>
 
     <item
         android:id="@+id/az_ascend"
-        android:title="字母升序"/>
+        android:title="音序升序"/>
 
     <item
         android:id="@+id/az_descend"
-        android:title="字母降序"/>
+        android:title="音序降序"/>
 </menu>
