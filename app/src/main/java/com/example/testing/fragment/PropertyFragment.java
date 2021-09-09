@@ -103,7 +103,6 @@ public class PropertyFragment extends Fragment {
         adapter = new SimpleAdapter(getContext(), listmap, android.R.layout.simple_list_item_2, new String[]{"predicate","object"},new int[]{android.R.id.text1,android.R.id.text2});
         listView.setAdapter(adapter);
 
-
         return view;
     }
 }

@@ -23,12 +23,14 @@
         <entry key="app/src/main/res/drawable/shape_talkee.xml" value="0.12522522522522522" />
         <entry key="app/src/main/res/drawable/shape_talker.xml" value="0.12522522522522522" />
         <entry key="app/src/main/res/drawable/unselected_button.xml" value="0.20925925925925926" />
+        <entry key="app/src/main/res/drawable/wechat_icon.xml" value="0.11666666666666667" />
         <entry key="app/src/main/res/layout/QA_icon_layout.xml" value="0.1059806508355321" />
         <entry key="app/src/main/res/layout/account_fragment.xml" value="0.268018018018018" />
         <entry key="app/src/main/res/layout/account_icon_layout.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_entity.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_history_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_keyword.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_link.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
@@ -40,7 +42,7 @@
         <entry key="app/src/main/res/layout/content_home_list.xml" value="0.16847826086956522" />
         <entry key="app/src/main/res/layout/explore_fragment.xml" value="0.1248900615655233" />
         <entry key="app/src/main/res/layout/explore_icon_layout.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/fragment_account.xml" value="0.11538461538461539" />
+        <entry key="app/src/main/res/layout/fragment_account.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_bio.xml" value="0.16847826086956522" />
         <entry key="app/src/main/res/layout/fragment_chem.xml" value="0.16847826086956522" />
         <entry key="app/src/main/res/layout/fragment_chinese.xml" value="0.16847826086956522" />
@@ -59,8 +61,10 @@
         <entry key="app/src/main/res/layout/fragment_relation.xml" value="0.1" />
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.1248900615655233" />
         <entry key="app/src/main/res/layout/home_icon_layout.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/list_view.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/property_item.xml" value="0.335" />
         <entry key="app/src/main/res/layout/q_a_fragment.xml" value="0.13082673702726474" />
         <entry key="app/src/main/res/layout/question_and_answer_icon_layout.xml" value="0.335" />
         <entry key="app/src/main/res/layout/share.xml" value="0.1" />

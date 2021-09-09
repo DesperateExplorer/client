@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="265dp"
         android:ems="10"
+        android:hint="请输入一段文本"
         android:gravity="start|top"
         android:inputType="textMultiLine" />
 
@@ -21,4 +22,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="提交" />
+
+    <ListView
+        android:id="@+id/link_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

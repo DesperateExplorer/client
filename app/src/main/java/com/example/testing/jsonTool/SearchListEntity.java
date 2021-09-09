@@ -14,7 +14,7 @@ public class SearchListEntity {
     public void setLabel(String s){
         this.label = s;
     }
-    public void setUrl(String s){
+    public void setUri(String s){
         this.uri = s;
     }
 
