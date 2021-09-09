@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.testing.AppSingle;
 import com.example.testing.LoginActivity;
 import com.example.testing.MainActivity;
 import com.example.testing.MyApplication;
@@ -78,14 +79,13 @@ public class AccountFragment extends Fragment {
         ImageView imageView = view.findViewById(R.id.account_icon);
         // Username
         TextView ID = view.findViewById(R.id.Username);
-        MyApplication myapp = (MyApplication) getActivity().getApplication();
         TextView exit = view.findViewById(R.id.exit);
         TextView starList = view.findViewById(R.id.starred);
         TextView historyList = view.findViewById(R.id.history_list);
         TextView keyword = view.findViewById(R.id.history_keyword);
 
         //设置动作
-        ID.setText(myapp.getUsername());
+        ID.setText(AppSingle.getUsername());
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -22,8 +22,6 @@ public class LoginActivity extends AppCompatActivity {
     ImageView backButton;
     Button registerButton;
     Button loginButton;
-    private MyApplication myApp;
-//    String UserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +58,11 @@ public class LoginActivity extends AppCompatActivity {
                 //TODO：加入global variable，记录当前用户的id
                 //历史记录+收藏信息
                 //输入的用户名：username.getText();
-                String UserID = username.getText().toString();
+                String userId = username.getText().toString();
                 //输入的密码：password.getText();
 
                 //登录成功：保存用户名
-                myApp = (MyApplication) getApplication();
-                myApp.setUsername(UserID);
+                AppSingle.setUsername(userId);
 
                 //TODO:登录成功：发送网络请求，获得历史数据
                 //Toy data
@@ -144,9 +141,9 @@ public class LoginActivity extends AppCompatActivity {
                     uri.add(listEntity.getUri());
                     subject.add(listEntity.getSubject());
                 }
-                myApp.setStarLabel(label);
-                myApp.setStarUri(uri);
-                myApp.setStarSubject(subject);
+                AppSingle.setStarLabel(label);
+                AppSingle.setStarUri(uri);
+                AppSingle.setStarSubject(subject);
 
                 //访问过的列表:
                 list = gson.fromJson(jsonData_history,new TypeToken<List<ListEntity>>(){}.getType());
@@ -158,9 +155,9 @@ public class LoginActivity extends AppCompatActivity {
                     uri.add(listEntity.getUri());
                     subject.add(listEntity.getSubject());
                 }
-                myApp.setHistoryLabel(label);
-                myApp.setHistoryUri(uri);
-                myApp.setHistorySubject(subject);
+                AppSingle.setHistoryLabel(label);
+                AppSingle.setHistoryUri(uri);
+                AppSingle.setHistorySubject(subject);
 
                 //TODO:访问过的实体
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);

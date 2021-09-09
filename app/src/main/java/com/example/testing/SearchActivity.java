@@ -20,6 +20,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import scut.carson_ho.searchview.ICallBack;
@@ -31,13 +32,15 @@ public class SearchActivity extends AppCompatActivity {
 
     // 初始化搜索框变量
     private SearchView searchView;
-    private TextView textView;
+    private TextView sort_textView;
+    private TextView filter_textView;
     private ArrayList<String> result = new ArrayList<>();
 
     private ListView listView;
 //    private BaseAdapter adapter;
     private int counter;
-    String sort;
+    Integer sort;
+    Integer filter;
     String currentSubject;
     MyApplication myApp;
     ArrayList<SearchListEntity> list;
@@ -45,19 +48,42 @@ public class SearchActivity extends AppCompatActivity {
     ArrayList<String> uri = new ArrayList<>();
     ArrayList<Boolean> visited = new ArrayList<>();
 
+    private HashMap<String,Integer> mapping = new HashMap<String,Integer>(){
+        {
+            put("默认排序",0);
+            put("升序",1);
+            put("降序",2);
+            put("音序升序",3);
+            put("音序降序",4);
+        }
+    };
+
+    private HashMap<String,Integer> mapping2 = new HashMap<String,Integer>(){
+        {
+            put("无筛选",11);
+            put("长度筛选:3",3);
+            put("长度筛选:5",5);
+            put("长度筛选:7",7);
+            put("长度筛选:10",10);
+        }
+    };
+
+
     // 设置popup Menu
     private void showPopupMenu(View view) {
         // 这里的view代表popupMenu需要依附的view
         PopupMenu popupMenu = new PopupMenu(SearchActivity.this, view);
+
         // 获取布局文件
         popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
         popupMenu.show();
+
         // 通过上面这几行代码，就可以把控件显示出来了
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                textView.setText(item.getTitle());
-                sort = (String) item.getTitle();
+                sort_textView.setText(item.getTitle());
+                sort = mapping.get((String) item.getTitle());
                 return true;
             }
         });
@@ -70,6 +96,29 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
+    private void showPopupMenu2(View view) {
+        PopupMenu popupMenu2 = new PopupMenu(SearchActivity.this, view);
+
+        popupMenu2.getMenuInflater().inflate(R.menu.popup_menu2, popupMenu2.getMenu());
+        popupMenu2.show();
+
+        // 通过上面这几行代码，就可以把控件显示出来了
+        popupMenu2.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                filter_textView.setText(item.getTitle());
+                filter = mapping2.get((String) item.getTitle());
+                return true;
+            }
+        });
+        popupMenu2.setOnDismissListener(new PopupMenu.OnDismissListener() {
+            @Override
+            public void onDismiss(PopupMenu menu) {
+                // 控件消失时的事件
+            }
+        });
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +128,8 @@ public class SearchActivity extends AppCompatActivity {
 
         // 绑定组件
         searchView = (SearchView) findViewById(R.id.search_view);
-        textView = findViewById(R.id.sort);
+        sort_textView = findViewById(R.id.sort);
+        filter_textView = findViewById(R.id.filter);
         listView = (ListView)findViewById(R.id.list_view);
 
         // 设置点击搜索按键后的操作（通过回调接口）
@@ -90,7 +140,7 @@ public class SearchActivity extends AppCompatActivity {
 
                 //TODO：string是用户输入的关键词，需要存
                 //TODO：调用网络接口得到result
-                //parameters: string, subject, sort
+                //parameters: string, subject, sort, filter
 
                 //subject
                 Intent intent = getIntent();
@@ -99,7 +149,7 @@ public class SearchActivity extends AppCompatActivity {
                 //sort: 本文件声明的sort
 
                 //把string写入本地缓存
-                ((MyApplication)getApplication()).addKeyWord(string);
+                AppSingle.addKeyWord(string);
 
                 //得到的结果
                 String jsonData = "[{\n" +
@@ -187,12 +237,11 @@ public class SearchActivity extends AppCompatActivity {
                     uri.add(searchListEntity.getUri());
                 }
 
-                myApp = (MyApplication) getApplication();
                 //检查当前实体是不是已经被访问
                 for(String s :uri)
                 {
-                    boolean t = myApp.checkEntity(s,currentSubject);
-                    visited.add(Boolean.valueOf(t));
+
+                    visited.add(AppSingle.checkEntity(s,currentSubject));
                 }
 
 //                BaseAdapter adapter = new ArrayAdapter<String>(SearchActivity.this, android.R.layout.simple_list_item_1, label);
@@ -208,11 +257,11 @@ public class SearchActivity extends AppCompatActivity {
                         Intent intent = new Intent(SearchActivity.this,EntityActivity.class);
 
                         //加入访问列表
-                        myApp.addLabel(label.get(i));
-                        myApp.addUri(uri.get(i));
-                        myApp.addSubject(currentSubject);
+                        AppSingle.addLabel(label.get(i));
+                        AppSingle.addUri(uri.get(i));
+                        AppSingle.addSubject(currentSubject);
                         System.out.println(currentSubject);
-                        visited.set(i,1);
+                        visited.set(i,true);
 
                         //告诉adapter
                         adapter.notifyDataSetChanged();
@@ -235,10 +284,17 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         //设置排序方式
-        textView.setOnClickListener(new View.OnClickListener() {
+        sort_textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPopupMenu(view);
+            }
+        });
+
+        filter_textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopupMenu2(view);
             }
         });
     }

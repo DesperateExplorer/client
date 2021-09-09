@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.testing.MyApplication;
+import com.example.testing.AppSingle;
 import com.example.testing.R;
 import com.example.testing.SearchActivity;
 import com.example.testing.adapter.SearchListAdapter;
@@ -35,7 +35,6 @@ public class LinkActivity extends AppCompatActivity {
 
     private ListView listView;
     String currentSubject;
-    MyApplication myApp;
     ArrayList<SearchListEntity> list;
     ArrayList<String> label = new ArrayList<>();
     ArrayList<String> uri = new ArrayList<>();
@@ -146,7 +145,6 @@ public class LinkActivity extends AppCompatActivity {
                     uri.add(searchListEntity.getUri());
                 }
 
-                MyApplication myApp = (MyApplication) getApplication();
 //                //检查当前实体是不是已经被访问
 //                for(String s :uri)
 //                {
@@ -173,9 +171,9 @@ public class LinkActivity extends AppCompatActivity {
                         Intent intent = new Intent(LinkActivity.this,EntityActivity.class);
 
                         //加入历史访问列表
-                        myApp.addLabel(label.get(i));
-                        myApp.addUri(uri.get(i));
-                        myApp.addSubject(currentSubject);
+                        AppSingle.addLabel(label.get(i));
+                        AppSingle.addUri(uri.get(i));
+                        AppSingle.addSubject(currentSubject);
                         System.out.println(currentSubject);
                         visited.set(i,1);
 

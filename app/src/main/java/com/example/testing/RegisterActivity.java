@@ -32,8 +32,6 @@ public class RegisterActivity extends AppCompatActivity {
     private Button button;
     private EditText username;
     private EditText password;
-//    String userId;
-//    public MyApplication myapp;
 
     private Activity _thisActivity;
 
@@ -55,7 +53,6 @@ public class RegisterActivity extends AppCompatActivity {
 
 //                TODO_OK：发送Username和password（已完成，已测试）
 //                TODO：加（二次）验证密码+TODO（未完成！）
-//                myapp = (MyApplication) getApplication();
 
                 String userId = username.getText().toString();
                 String passwordText = password.getText().toString();
@@ -70,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
                         .build();
                 Request request = new Request
                         .Builder()
-                        /*.url(myapp.baseUrl + "/register")*/.url("http://183.173.133.56:8080/register")
+                        .url(AppSingle.baseUrl + "/register")
                         .post(body)
                         .build();
 
@@ -99,7 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), "请输入用户名或密码", Toast.LENGTH_SHORT).show();
                                     } else if(code == 0) {
                                         Toast.makeText(getApplicationContext(), "注册成功", Toast.LENGTH_SHORT).show();
-//                                        myapp.setUsername(userId);
+                                        AppSingle.setUsername(userId);
                                         Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
                                         _thisActivity.startActivity(intent);
                                     } else {
@@ -111,8 +108,6 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
 //                finish();
             }
         });

@@ -2,6 +2,7 @@ package com.example.testing.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.testing.AppSingle;
 import com.example.testing.HomeActivity;
 import com.example.testing.MyApplication;
 
@@ -46,7 +47,7 @@ public class SetSubjectActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_subject);
         myApp = (MyApplication) getApplication();
-        subList = myApp.getSubjectList();
+        subList = AppSingle.getSubjectList();
 
         Resources res = getResources();
 
@@ -152,7 +153,7 @@ public class SetSubjectActivity extends AppCompatActivity {
                         if(Selected.get(i) == true)
                             newList.add(i);
                     }
-                    myApp.setSubjectList(newList);
+                    AppSingle.setSubjectList(newList);
                     System.out.println(newList);
 
                     //TODO:发送改后的学科列表
