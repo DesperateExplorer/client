@@ -51,6 +51,12 @@ public class EntityActivity extends QMUIFragmentActivity {
 
         //TODO：先给前端数据库发请求，看能不能拿到实体详情页的本地缓存
         //TODO：如果失败，则给后端发送请求，获取实体详情页的缓存信息
+        // 这里的逻辑比较神奇，四个fragment需要从这个entityActivity中获得他们需要的数据
+        // 我采用的方式是在这个类中定义四个接口函数，
+        // 描述：EntityDescription1,EntityDescription2
+        // 属性：EntityProperty
+        // 关系：用entityContent1，entityContent2 解析json，最终整合到ShowRelation数组中
+        // 问题：QuestionList
 
         // 绑定元件
         TextView textView = findViewById(R.id.entity_header);
