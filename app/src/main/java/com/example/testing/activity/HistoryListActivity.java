@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.testing.AppSingle;
 import com.example.testing.MyApplication;
 import com.example.testing.R;
 import com.example.testing.SearchActivity;
@@ -32,9 +33,9 @@ public class HistoryListActivity extends AppCompatActivity {
         //绑定组件
         ListView listView = findViewById(R.id.historyList_listView);
         ImageView imageView = findViewById(R.id.historylist_back);
-        ArrayList<String> label = ((MyApplication) getApplication()).getHistoryLabel();
-        ArrayList<String> uri = ((MyApplication) getApplication()).getHistoryUri();
-        ArrayList<String> Subject = ((MyApplication) getApplication()).getHistorySubject();
+        ArrayList<String> label = AppSingle.getHistoryLabel();
+        ArrayList<String> uri = AppSingle.getHistoryUri();
+        ArrayList<String> Subject = AppSingle.getHistorySubject();
 
         adapter = new ArrayAdapter<String>(HistoryListActivity.this, android.R.layout.simple_list_item_1, label);
         listView.setAdapter(adapter);

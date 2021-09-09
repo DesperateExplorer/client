@@ -28,9 +28,9 @@ public class SearchListAdapter extends ArrayAdapter<String> {
     private int mCurrentItem = 0;
     private boolean isClick = false;
     @LayoutRes int res;
-    private ArrayList<Integer> visited;
+    private ArrayList<Boolean> visited;
 
-    public SearchListAdapter(Context sContext, ArrayList<String> label, ArrayList<SearchListEntity> Data, ArrayList<Integer> visited, @LayoutRes int res) {
+    public SearchListAdapter(Context sContext, ArrayList<String> label, ArrayList<SearchListEntity> Data, ArrayList<Boolean> visited, @LayoutRes int res) {
         super(sContext,res,label);
         this.label = label;
         this.Data = Data;
@@ -68,7 +68,7 @@ public class SearchListAdapter extends ArrayAdapter<String> {
         }
         TextView textView = (TextView) convertView.findViewById(R.id.search_list_title);
 
-        if(visited.get(position) == 1)
+        if(visited.get(position) == true)
         {
             textView.setTextColor(0xff5F5E5E);
         }

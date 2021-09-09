@@ -3,6 +3,7 @@ package com.example.testing.activity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.example.testing.AppSingle;
 import com.example.testing.MyApplication;
 import com.example.testing.R;
 import com.example.testing.adapter.EntityAdapter;
@@ -35,7 +36,6 @@ public class EntityActivity extends QMUIFragmentActivity {
     String label;
     String uri;
     String subject;
-    MyApplication myApp;
     private Drawable myTasksDrawable;
 
     @Override
@@ -47,9 +47,6 @@ public class EntityActivity extends QMUIFragmentActivity {
         label = intent.getStringExtra("label");
         uri = intent.getStringExtra("uri");
         subject = intent.getStringExtra("subject");
-
-        //绑定Application，获得全局变量（写入收藏缓存信息）
-        myApp = (MyApplication) getApplication();
 
 
         //TODO：先给前端数据库发请求，看能不能拿到实体详情页的本地缓存
@@ -73,7 +70,7 @@ public class EntityActivity extends QMUIFragmentActivity {
         textView.setText(label);
         textView.setTextSize(30);
 
-        if (myApp.checkStarEntity(uri, subject) == true) {
+        if (AppSingle.checkStarEntity(uri, subject) == true) {
             myTasksDrawable = star.getDrawable();
             myTasksDrawable.setTint(getResources().getColor(R.color.yellow));
             isStarred = true;
@@ -90,19 +87,19 @@ public class EntityActivity extends QMUIFragmentActivity {
                     myTasksDrawable.setTint(getResources().getColor(R.color.yellow));
                     isStarred = true;
                     //缓存到本地
-                    myApp.addStarLabel(label);
-                    myApp.addStarUri(uri);
-                    myApp.addStarSubject(subject);
+                    AppSingle.addStarLabel(label);
+                    AppSingle.addStarUri(uri);
+                    AppSingle.addStarSubject(subject);
 
                 } else {
                     myTasksDrawable = star.getDrawable();
                     myTasksDrawable.setTint(getResources().getColor(R.color.gray));
                     isStarred = false;
                     //缓存到本地
-                    int i = myApp.findId(uri, subject);
-                    myApp.removeStarLabel(i);
-                    myApp.removeStarUri(i);
-                    myApp.removeStarSubject(i);
+                    int i = AppSingle.findId(uri, subject);
+                    AppSingle.removeStarLabel(i);
+                    AppSingle.removeStarUri(i);
+                    AppSingle.removeStarSubject(i);
                 }
             }
         });

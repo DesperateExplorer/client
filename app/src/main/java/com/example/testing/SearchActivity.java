@@ -46,7 +46,7 @@ public class SearchActivity extends AppCompatActivity {
     ArrayList<SearchListEntity> list;
     ArrayList<String> label = new ArrayList<>();
     ArrayList<String> uri = new ArrayList<>();
-    ArrayList<Integer> visited = new ArrayList<>();
+    ArrayList<Boolean> visited = new ArrayList<>();
 
     private HashMap<String,Integer> mapping = new HashMap<String,Integer>(){
         {
@@ -149,7 +149,7 @@ public class SearchActivity extends AppCompatActivity {
                 //sort: 本文件声明的sort
 
                 //把string写入本地缓存
-                ((MyApplication)getApplication()).addKeyWord(string);
+                AppSingle.addKeyWord(string);
 
                 //得到的结果
                 String jsonData = "[{\n" +
@@ -237,18 +237,10 @@ public class SearchActivity extends AppCompatActivity {
                     uri.add(searchListEntity.getUri());
                 }
 
-                myApp = (MyApplication) getApplication();
                 //检查当前实体是不是已经被访问
                 for(String s :uri)
                 {
-                    boolean t = myApp.checkEntity(s,currentSubject);
-                    if(t == true){
-                        visited.add(1);
-                    }
-
-                    else {
-                        visited.add(0);
-                    }
+                    visited.add(AppSingle.checkEntity(s,currentSubject));
                 }
 
 //                BaseAdapter adapter = new ArrayAdapter<String>(SearchActivity.this, android.R.layout.simple_list_item_1, label);
@@ -264,11 +256,11 @@ public class SearchActivity extends AppCompatActivity {
                         Intent intent = new Intent(SearchActivity.this,EntityActivity.class);
 
                         //加入访问列表
-                        myApp.addLabel(label.get(i));
-                        myApp.addUri(uri.get(i));
-                        myApp.addSubject(currentSubject);
+                        AppSingle.addLabel(label.get(i));
+                        AppSingle.addUri(uri.get(i));
+                        AppSingle.addSubject(currentSubject);
                         System.out.println(currentSubject);
-                        visited.set(i,1);
+                        visited.set(i,true);
 
                         //告诉adapter
                         adapter.notifyDataSetChanged();

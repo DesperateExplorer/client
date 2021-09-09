@@ -22,6 +22,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.testing.AppSingle;
 import com.example.testing.activity.SetSubjectActivity;
 import com.example.testing.R;
 import com.example.testing.SearchActivity;
@@ -99,7 +100,6 @@ public class HomeFragment extends QMUIFragment {
     QMUITabSegment mTabSegment;
     @BindView(R.id.home_contentViewPager)
     ViewPager mContentViewPager;
-    private MyApplication myApp;
     String currentSubject;
 
     public enum ContentPage {
@@ -295,8 +295,7 @@ public class HomeFragment extends QMUIFragment {
         mContentViewPager.setCurrentItem(mDestPage.getPosition(), false);
 
         //从Global variable更新当前的学科列表
-        myApp = (MyApplication) getActivity().getApplication();
-        mSubjectList = myApp.getSubjectList();
+        mSubjectList = AppSingle.getSubjectList();
         mCurrentItemCount = mSubjectList.size();
         mPagerAdapter.notifyDataSetChanged();
         mTabSegment.reset();

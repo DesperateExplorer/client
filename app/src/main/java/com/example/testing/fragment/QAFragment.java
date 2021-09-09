@@ -22,7 +22,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.testing.MyApplication;
+import com.example.testing.AppSingle;
 import com.example.testing.R;
 import com.example.testing.adapter.ChatAdapter;
 import com.example.testing.model.ChatModel;
@@ -90,7 +90,6 @@ public class QAFragment extends QMUIFragment {
     QMUITabSegment mTabSegment;
     @BindView(R.id.qa_contentViewPager)
     ViewPager mContentViewPager;
-    private MyApplication myApp;
 
     public enum ContentPage {
         Item1(0),
@@ -310,8 +309,7 @@ public class QAFragment extends QMUIFragment {
         mContentViewPager.setCurrentItem(mDestPage.getPosition(), false);
 
         //从Global variable更新当前的学科列表
-        myApp = (MyApplication) getActivity().getApplication();
-        mSubjectList = myApp.getSubjectList();
+        mSubjectList = AppSingle.getSubjectList();
         mCurrentItemCount = mSubjectList.size();
         mPagerAdapter.notifyDataSetChanged();
         mTabSegment.reset();

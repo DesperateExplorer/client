@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.testing.AppSingle;
 import com.example.testing.MyApplication;
 import com.example.testing.R;
 import com.example.testing.SearchActivity;
@@ -19,7 +20,6 @@ import java.util.ArrayList;
 
 public class StarListActivity extends AppCompatActivity {
 
-    MyApplication myApp;
     private BaseAdapter adapter;
 
     @Override
@@ -30,10 +30,9 @@ public class StarListActivity extends AppCompatActivity {
         //绑定组件
         ListView listView = findViewById(R.id.starList_listView);
         ImageView imageView = findViewById(R.id.starlist_back);
-        myApp = (MyApplication) getApplication();
-        ArrayList<String> label = myApp.getStarLabel();
-        ArrayList<String> uri = myApp.getStarUri();
-        ArrayList<String> subject = myApp.getStarSubject();
+        ArrayList<String> label = AppSingle.getStarLabel();
+        ArrayList<String> uri = AppSingle.getStarUri();
+        ArrayList<String> subject = AppSingle.getStarSubject();
 
         adapter = new ArrayAdapter<String>(StarListActivity.this, android.R.layout.simple_list_item_1, label);
         listView.setAdapter(adapter);

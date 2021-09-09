@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.testing.AppSingle;
 import com.example.testing.MyApplication;
 import com.example.testing.R;
 
@@ -29,7 +30,7 @@ public class KeywordActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.keyword_listView);
         ImageView imageView = findViewById(R.id.keyword_back);
 
-        ArrayList<String> HistoryKeyWord = ((MyApplication)getApplication()).getKeyWord();
+        ArrayList<String> HistoryKeyWord = AppSingle.getKeyWord();
         adapter = new ArrayAdapter<String>(KeywordActivity.this, android.R.layout.simple_list_item_1, HistoryKeyWord);
         listView.setAdapter(adapter);
 
