@@ -1,13 +1,13 @@
 package com.example.testing;
 
 import android.content.Context;
-
 import com.example.testing.jsonTool.EntityContent1;
 import com.example.testing.jsonTool.EntityDescription;
 import com.example.testing.jsonTool.EntityProperty;
 import com.example.testing.jsonTool.QuestionList;
 import com.example.testing.util.ACache;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -29,13 +29,21 @@ public class AppSingle {
     }
 
     /**
-     * 缓存相关
+     * 网络请求相关
      */
+    public final static String scheme = "http"; // can only be "http" or "https"
+    public final static String host = "183.172.197.98";
+    public final static int port = 8080;
+    public final static String baseUrl = scheme + "://" + host + ":" + port;
+
     public static ACache aCache;
     public static String getCacheKey(String c, String u) {
         return c + "|" + u;// course + "|" + uri
     }
 
+    /**
+     * 缓存相关
+     */
 
     /** 存储的历史访问实体列表
      *  {label, uri, subject} 三元组
@@ -43,15 +51,6 @@ public class AppSingle {
     private static ArrayList<String> historyLabel;
     private static ArrayList<String> historyUri;
     private static ArrayList<String> historySubject;
-
-    /**
-     * 网络请求相关
-     */
-    public final static String scheme = "http"; // can only be "http" or "https"
-    public final static String host = "183.173.130.228";
-    public final static int port = 8080;
-    public final static String baseUrl = scheme + "://" + host + ":" + port;
-    public final static String failMsg = "OpenEduKG or Network failed!";
 
     //set方法：login/register后初始化用
     public static void setHistoryLabel(ArrayList<String> s)
@@ -281,6 +280,20 @@ public class AppSingle {
         }
 
     };
+    public final static HashMap<Integer,String> INT2SUBJECT= new HashMap<Integer,String>(){
+        {
+            put(0,"语文");
+            put(1,"数学");
+            put(2,"英语");
+            put(3,"物理");
+            put(4,"化学");
+            put(5,"生物");
+            put(6,"地理");
+            put(7,"历史");
+            put(8,"政治");
+        }
+
+    };
     public final static HashMap<String, String> SUBJECT2ENG = new HashMap<String, String>() {
         {
             put("语文", "chinese");
@@ -307,6 +320,35 @@ public class AppSingle {
         {
             subjectList.add(i);
         }
+    }
+
+    public static List<Integer> TF2List(String tf)
+    {
+        List<Integer> list = new LinkedList<>();
+        for(int i = 0; i< tf.length(); i++)
+        {
+            Character c = tf.charAt(i);
+            if(c.equals('T'))
+            {
+                list.add(i);
+            }
+        }
+        return list;
+    }
+
+    public static String List2TF(List<Integer> newList)
+    {
+        String tf = new String();
+        for(int i=0;i<9;i++)
+        {
+            if(newList.contains(i))
+            {
+                tf+="T";
+            }
+            else
+                tf+="F";
+        }
+        return tf;
     }
 
     private static ArrayList<String> keyword = new ArrayList<>();
@@ -348,6 +390,24 @@ public class AppSingle {
     public static int getTotalScore()
     {
         return total_score;
+    }
+
+    //清空函数
+    public static void ClearAll()
+    {
+        username = "";
+        historyLabel.clear();
+        historyUri.clear();
+        historySubject.clear();
+        starLabel.clear();
+        starUri.clear();
+        starSubject.clear();
+        description.clear();
+        property.clear();
+        relation.clear();
+        practice.clear();
+        subjectList.clear();
+        keyword.clear();
     }
 
 }

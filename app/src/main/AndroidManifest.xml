@@ -15,6 +15,9 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activity.PlusRecommendActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.PlusTestActivity"
             android:exported="true" />
         <activity

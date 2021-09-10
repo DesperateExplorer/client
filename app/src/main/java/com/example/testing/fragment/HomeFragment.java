@@ -286,6 +286,10 @@ public class HomeFragment extends QMUIFragment {
         //初始化横向滑动的tab
         initTabAndPager();
 
+        //TODO：发送网络请求，初始化列表
+
+
+
         return rootView;
     }
 
@@ -403,9 +407,9 @@ public class HomeFragment extends QMUIFragment {
 
     @Override
     public void refreshFromScheme(@Nullable Bundle bundle) {
-        Toast.makeText(getContext(),
-                "refreshFromScheme: name = " + bundle.getString("name"),
-                Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(),
+//                "refreshFromScheme: name = " + bundle.getString("name"),
+//                Toast.LENGTH_SHORT).show();
     }
 
 
