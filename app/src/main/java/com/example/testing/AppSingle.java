@@ -32,6 +32,9 @@ public class AppSingle {
      * 缓存相关
      */
     public static ACache aCache;
+    public static String getCacheKey(String c, String u) {
+        return c + "|" + u;// course + "|" + uri
+    }
 
 
     /** 存储的历史访问实体列表

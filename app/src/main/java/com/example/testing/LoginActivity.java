@@ -2,26 +2,45 @@ package com.example.testing;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.testing.jsonTool.EntityDescription;
 import com.example.testing.jsonTool.ListEntity;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
     ImageView backButton;
     Button registerButton;
     Button loginButton;
+
+    Activity _this = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +73,94 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
 
 
-                //TODO：需要发送username和password，get是否成功
-                //TODO：加入global variable，记录当前用户的id
-                //历史记录+收藏信息
+                //TODONE：需要发送username和password，get是否成功
+                //TODO: 历史记录+收藏信息
                 String userId = username.getText().toString();
                 String pwd = password.getText().toString();
 
-                //登录成功：保存用户名
+                //TODO: 只有登录成功：保存用户名
                 AppSingle.setUsername(userId);
+
+                OkHttpClient client = new OkHttpClient();
+                FormBody loginBody = new FormBody
+                        .Builder()
+                        .add("userId", userId)
+                        .add("password", pwd)
+                        .build();
+                Request request = new Request
+                        .Builder()
+                        .url(AppSingle.baseUrl + "/login")
+                        .post(loginBody)
+                        .build();
+
+                Call call = client.newCall(request);
+                call.enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        System.err.println("Login: " + e.getMessage());
+                        _this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), AppSingle.failMsg, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        System.err.println(response.toString());
+                        if(response.isSuccessful()) {
+                            JsonObject jsonObject = JsonParser.parseString(response.body().string()).getAsJsonObject();
+                            if(jsonObject.get("code").getAsInt() == 0) {
+                                JsonArray history = jsonObject.get("history").getAsJsonArray();
+                                String courses = jsonObject.get("courses").getAsString();
+                                //TODO: set AppSingle.subjecList
+                                try {
+                                    for(JsonElement elem: history) {
+
+                                            JSONObject temp = new JSONObject(elem.getAsString());
+    //                                        String label = temp.getString("label");
+                                            String uri = temp.getString("uri");
+                                            String course = temp.getString("course");
+                                            AppSingle.aCache.put(AppSingle.getCacheKey(course, uri), temp);
+                                            AppSingle.addLabel(temp.getString("label"));
+                                            AppSingle.addUri(uri);
+                                            AppSingle.addSubject(course);
+                                            if(temp.getBoolean("favorite")) {
+                                                AppSingle.addStarLabel(temp.getString("label"));
+                                                AppSingle.addStarUri(uri);
+                                                AppSingle.addStarSubject(course);
+                                        }
+                                    }
+                                    AppSingle.setUsername(userId);
+                                    _this.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            username.getText().clear();
+                                            password.getText().clear();
+                                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+                                }
+                                catch (Exception ex) {
+                                    ex.printStackTrace();
+                                }
+
+                            } else {
+                                _this.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(), "用户名不存在或密码错误", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        } else {
+                            System.err.println("response code: " + response.code());
+                        }
+                    }
+                });
+
 
                 //TODO:登录成功：发送网络请求，获得历史数据
                 //Toy data
