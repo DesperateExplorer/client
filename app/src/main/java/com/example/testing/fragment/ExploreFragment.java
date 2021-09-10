@@ -326,7 +326,7 @@ public class ExploreFragment extends QMUIFragment {
             textView.setWidth(150);
             textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
             textView.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
-            textView.setText("点击上面,\n 输入一段文本，\n 发现里面蕴藏的" + getSubject.get(mSubjectList.get(page.getPosition())) + "的知识点吧");
+            textView.setText("点击上方学科列表,\n\n 输入一段文本，\n\n 发现里面蕴藏的" + getSubject.get(mSubjectList.get(page.getPosition())) + "的知识点吧");
             QMUISkinHelper.setSkinValue(textView, new SkinWriter(){
                 @Override
                 public void write(QMUISkinValueBuilder builder) {

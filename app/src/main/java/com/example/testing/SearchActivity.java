@@ -240,6 +240,7 @@ public class SearchActivity extends AppCompatActivity {
                 //检查当前实体是不是已经被访问
                 for(String s :uri)
                 {
+
                     visited.add(AppSingle.checkEntity(s,currentSubject));
                 }
 

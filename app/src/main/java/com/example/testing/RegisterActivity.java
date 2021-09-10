@@ -67,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
                         .build();
                 Request request = new Request
                         .Builder()
-                        /*.url(myapp.baseUrl + "/register")*/.url("http://183.173.133.56:8080/register")
+                        .url(AppSingle.baseUrl + "/register")
                         .post(body)
                         .build();
 
@@ -92,7 +92,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 public void run() {
                                     username.getText().clear();
                                     password.getText().clear();
-                                    if(code == 0) {
+                                    if (userId.isEmpty() || passwordText.isEmpty()) {
+                                        Toast.makeText(getApplicationContext(), "请输入用户名或密码", Toast.LENGTH_SHORT).show();
+                                    } else if(code == 0) {
                                         Toast.makeText(getApplicationContext(), "注册成功", Toast.LENGTH_SHORT).show();
                                         AppSingle.setUsername(userId);
                                         Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);

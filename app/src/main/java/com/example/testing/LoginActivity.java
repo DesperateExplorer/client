@@ -22,12 +22,13 @@ public class LoginActivity extends AppCompatActivity {
     ImageView backButton;
     Button registerButton;
     Button loginButton;
-    String UserID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        EditText username = findViewById(R.id.Userid);
+        EditText password = findViewById(R.id.Password);
 
         backButton = findViewById(R.id.BackButton);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -52,17 +53,16 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                EditText username = findViewById(R.id.Userid);
-                EditText password = findViewById(R.id.Password);
+
                 //TODO：需要发送username和password，get是否成功
                 //TODO：加入global variable，记录当前用户的id
                 //历史记录+收藏信息
                 //输入的用户名：username.getText();
-                UserID = username.getText().toString();
+                String userId = username.getText().toString();
                 //输入的密码：password.getText();
 
                 //登录成功：保存用户名
-                AppSingle.setUsername(UserID);
+                AppSingle.setUsername(userId);
 
                 //TODO:登录成功：发送网络请求，获得历史数据
                 //Toy data

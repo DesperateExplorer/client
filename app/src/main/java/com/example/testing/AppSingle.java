@@ -35,7 +35,7 @@ public class AppSingle {
     /**
      * 网络请求相关
      */
-    final public String baseUrl = "http://183.173.133.56:8080";
+    final public static String baseUrl = "http://183.173.133.56:8080";
 
     //set方法：login/register后初始化用
     public static void setHistoryLabel(ArrayList<String> s)
