@@ -1,5 +1,7 @@
 package com.example.testing;
 
+import android.content.Context;
+
 import com.example.testing.jsonTool.EntityContent1;
 import com.example.testing.jsonTool.EntityDescription;
 import com.example.testing.jsonTool.EntityProperty;
@@ -25,6 +27,11 @@ public class AppSingle {
         return username;
     }
 
+    /**
+     * 缓存相关
+     */
+
+
     /** 存储的历史访问实体列表
      *  {label, uri, subject} 三元组
      */
@@ -35,7 +42,10 @@ public class AppSingle {
     /**
      * 网络请求相关
      */
-    final public static String baseUrl = "http://183.173.133.56:8080";
+    public final static String scheme = "http"; // can only be "http" or "https"
+    public final static String host = "183.172.197.98";
+    public final static int port = 8080;
+    public final static String baseUrl = scheme + "://" + host + ":" + port;
 
     //set方法：login/register后初始化用
     public static void setHistoryLabel(ArrayList<String> s)
@@ -264,6 +274,19 @@ public class AppSingle {
             put("政治",8);
         }
 
+    };
+    public final static HashMap<String, String> SUBJECT2ENG = new HashMap<String, String>() {
+        {
+            put("语文", "chinese");
+            put("英语", "english");
+            put("数学", "math");
+            put("物理", "physics");
+            put("化学", "chemistry");
+            put("生物", "biology");
+            put("历史", "history");
+            put("地理", "geo");
+            put("政治", "politics");
+        }
     };
 
     public static List getSubjectList(){

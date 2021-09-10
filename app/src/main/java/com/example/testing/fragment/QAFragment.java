@@ -32,6 +32,7 @@ import com.qmuiteam.qmui.widget.tab.QMUITabBuilder;
 import com.qmuiteam.qmui.widget.tab.QMUITabIndicator;
 import com.qmuiteam.qmui.widget.tab.QMUITabSegment;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -40,6 +41,12 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -232,12 +239,12 @@ public class QAFragment extends QMUIFragment {
             @Override
             public void onClick(View v) {
                 String msg = editText.getText().toString();
+                editText.getText().clear();
                 if (!msg.isEmpty()) {
                     sendMessage(msg);
                     reply(msg);
-                    editText.setText("");
                 } else {
-                    Toast.makeText(getActivity(), "Cant be empty！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "问题不得为空！", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -273,10 +280,15 @@ public class QAFragment extends QMUIFragment {
      * @param message
      */
     void receiveMessage(String message) {
-        ChatModel chatModel = new ChatModel(R.drawable.image, "智能机器人", message, ChatModel.RECEIVE);
-        chatModelList.add(chatModel);
-        chatAdapter.notifyItemInserted(chatModelList.size() - 1);
-        recyclerView.scrollToPosition(chatModelList.size() - 1);
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ChatModel chatModel = new ChatModel(R.drawable.image, "智能机器人", message, ChatModel.RECEIVE);
+                chatModelList.add(chatModel);
+                chatAdapter.notifyItemInserted(chatModelList.size() - 1);
+                recyclerView.scrollToPosition(chatModelList.size() - 1);
+            }
+        });
     }
 
     /**
@@ -284,23 +296,60 @@ public class QAFragment extends QMUIFragment {
      * @param msg
      */
     void reply(String msg){
-        String rMsg="";
-        //TODO:给后端发inputstring，subject；获得回答
+//        String rMsg="";
+        //TODO:给后端发inputstring，course；获得回答
         //当前学科：currentSubject——语文，数学...（中文字符串）
-        switch (msg){
-            case "hello":
-                rMsg="hello! How are you？";
-                break;
-            case  "How old are you?":
-                rMsg="22";
-                break;
-            case "Subject":
-                rMsg = currentSubject;
-                break;
-        }
-        if(!rMsg.isEmpty()){
-            receiveMessage(rMsg);
-        }
+//        switch (msg){
+//            case "hello":
+//                rMsg="hello! How are you?";
+//                break;
+//            case  "How old are you?":
+//                rMsg="22";
+//                break;
+//            case "你好":
+//                rMsg = "你好，你怎么样？";
+//                break;
+//            default:
+//                rMsg = currentSubject;
+//                break;
+//        }
+            //TODO: 这是放进runOnUiThread的东西
+//            receiveMessage(msg);
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl httpUrl = new HttpUrl
+                .Builder()
+                .scheme(AppSingle.scheme)
+                .host(AppSingle.host)
+                .port(AppSingle.port)
+                .addPathSegment("QA")
+                .addQueryParameter("text", msg)
+                .addQueryParameter("course", AppSingle.SUBJECT2ENG.get(currentSubject))
+                .build();
+        Request request = new Request
+                .Builder()
+                .url(httpUrl)
+                .build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                System.err.println("OpenEduKG or Network failed!");
+                e.printStackTrace();
+                receiveMessage("错误：对不起，OpenEduKG或网络异常！");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if(response.isSuccessful()) {
+                    System.err.println(response.toString());
+                    receiveMessage(response.body().string());
+                } else {
+                    System.err.println("response is not in [200,300)");
+                    receiveMessage("返回状态码"+ response.code());
+                }
+            }
+        });
+
     }
 
     //For subject menu
@@ -332,18 +381,18 @@ public class QAFragment extends QMUIFragment {
         mTabSegment.addOnTabSelectedListener(new QMUITabSegment.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int index) {
-                Toast.makeText(getContext(), "select index " + index, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "select index " + index, Toast.LENGTH_SHORT).show();
                 currentSubject = getSubject.get(mSubjectList.get(index));
             }
 
             @Override
             public void onTabUnselected(int index) {
-                Toast.makeText(getContext(), "unSelect index " + index, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "unSelect index " + index, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onTabReselected(int index) {
-                Toast.makeText(getContext(), "reSelect index " + index, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "reSelect index " + index, Toast.LENGTH_SHORT).show();
             }
 
             @Override
