@@ -297,18 +297,18 @@ public class ExploreFragment extends QMUIFragment {
         mTabSegment.addOnTabSelectedListener(new QMUITabSegment.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int index) {
-                Toast.makeText(getContext(), "select index " + index, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "select index " + index, Toast.LENGTH_SHORT).show();
                 currentSubject = getSubject.get(mSubjectList.get(index));
             }
 
             @Override
             public void onTabUnselected(int index) {
-                Toast.makeText(getContext(), "unSelect index " + index, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "unSelect index " + index, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onTabReselected(int index) {
-                Toast.makeText(getContext(), "reSelect index " + index, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "reSelect index " + index, Toast.LENGTH_SHORT).show();
             }
 
             @Override
