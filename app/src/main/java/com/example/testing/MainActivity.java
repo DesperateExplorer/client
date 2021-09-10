@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         AppSingle.aCache = ACache.get(getApplicationContext());
+        System.err.println(getApplicationContext().getCacheDir());
         loginButton = findViewById(R.id.button);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

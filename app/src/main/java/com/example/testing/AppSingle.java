@@ -14,7 +14,19 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class AppSingle {
+    private static Context singleContext;
     private static AppSingle instance;
+
+    private AppSingle(Context context) {
+        singleContext = context;
+    }
+
+    public static synchronized AppSingle getInstance() {
+        if(instance == null) {
+            instance = new AppSingle(singleContext);
+        }
+        return instance;
+    }
 
     /**
      * 存储的用户名
@@ -32,7 +44,7 @@ public class AppSingle {
      * 网络请求相关
      */
     public final static String scheme = "http"; // can only be "http" or "https"
-    public final static String host = "183.172.197.98";
+    public final static String host = "183.173.130.228";
     public final static int port = 8080;
     public final static String baseUrl = scheme + "://" + host + ":" + port;
     public final static String failMsg = "OpenEduKG or Network failed!";
@@ -49,9 +61,9 @@ public class AppSingle {
     /** 存储的历史访问实体列表
      *  {label, uri, subject} 三元组
      */
-    private static ArrayList<String> historyLabel;
-    private static ArrayList<String> historyUri;
-    private static ArrayList<String> historySubject;
+    private static ArrayList<String> historyLabel = new ArrayList<>();
+    private static ArrayList<String> historyUri = new ArrayList<>();
+    private static ArrayList<String> historySubject = new ArrayList<>();
 
     //set方法：login/register后初始化用
     public static void setHistoryLabel(ArrayList<String> s)
@@ -115,9 +127,9 @@ public class AppSingle {
     /** 收藏实体列表
      *  {label, uri, subject} 三元组
      */
-    private static ArrayList<String> starLabel;
-    private static ArrayList<String> starUri;
-    private static ArrayList<String> starSubject;
+    private static ArrayList<String> starLabel = new ArrayList<>();
+    private static ArrayList<String> starUri = new ArrayList<>();
+    private static ArrayList<String> starSubject = new ArrayList<>();
 
     //set方法：login/register后初始化用
     public static void setStarLabel(ArrayList<String> s)
@@ -207,10 +219,10 @@ public class AppSingle {
     /** 历史访问的实体信息
      *
      */
-    private static ArrayList<EntityDescription> description;
-    private static ArrayList<EntityProperty> property;
-    private static ArrayList<EntityContent1> relation;
-    private static ArrayList<QuestionList> practice;
+    private static ArrayList<EntityDescription> description = new ArrayList<>();
+    private static ArrayList<EntityProperty> property = new ArrayList<>();
+    private static ArrayList<EntityContent1> relation = new ArrayList<>();
+    private static ArrayList<QuestionList> practice = new ArrayList<>();
 
     //set方法：login/register后初始化用
     public static void setDescription(ArrayList<EntityDescription> Description)
@@ -409,6 +421,9 @@ public class AppSingle {
         practice.clear();
         subjectList.clear();
         keyword.clear();
+        aCache.clear();
+
+        InitSubjectList();
     }
 
 }

@@ -16,9 +16,17 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MyApplication extends Application {
+
+    private static MyApplication instance;
+
+    public static MyApplication getInstance() {
+        return instance;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         //初始化QMUISwipeBackActivityManager，否则点击屏幕时就程序就会崩溃
         QMUISwipeBackActivityManager.init(this);
         AppSingle.InitSubjectList();
