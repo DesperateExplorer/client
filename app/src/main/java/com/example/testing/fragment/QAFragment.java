@@ -313,8 +313,7 @@ public class QAFragment extends QMUIFragment {
 //                rMsg = currentSubject;
 //                break;
 //        }
-            //TODO: 这是放进runOnUiThread的东西
-//            receiveMessage(msg);
+
         OkHttpClient client = new OkHttpClient();
         HttpUrl httpUrl = new HttpUrl
                 .Builder()
@@ -333,7 +332,7 @@ public class QAFragment extends QMUIFragment {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                System.err.println("OpenEduKG or Network failed!");
+                System.err.println(AppSingle.failMsg);
                 e.printStackTrace();
                 receiveMessage("错误：对不起，OpenEduKG或网络异常！");
             }

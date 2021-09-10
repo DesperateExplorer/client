@@ -57,9 +57,8 @@ public class LoginActivity extends AppCompatActivity {
                 //TODO：需要发送username和password，get是否成功
                 //TODO：加入global variable，记录当前用户的id
                 //历史记录+收藏信息
-                //输入的用户名：username.getText();
                 String userId = username.getText().toString();
-                //输入的密码：password.getText();
+                String pwd = password.getText().toString();
 
                 //登录成功：保存用户名
                 AppSingle.setUsername(userId);
@@ -159,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
                 AppSingle.setHistoryUri(uri);
                 AppSingle.setHistorySubject(subject);
 
-                //TODO:访问过的实体
+                //Deprecate_TODO:访问过的实体
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
             }

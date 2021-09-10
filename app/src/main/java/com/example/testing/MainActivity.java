@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+import com.example.testing.util.ACache;
+
 public class MainActivity extends AppCompatActivity {
 
     Button loginButton;
@@ -19,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        AppSingle.aCache = ACache.get(getApplicationContext());
         loginButton = findViewById(R.id.button);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,6 +6,7 @@ import com.example.testing.jsonTool.EntityContent1;
 import com.example.testing.jsonTool.EntityDescription;
 import com.example.testing.jsonTool.EntityProperty;
 import com.example.testing.jsonTool.QuestionList;
+import com.example.testing.util.ACache;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +31,7 @@ public class AppSingle {
     /**
      * 缓存相关
      */
+    public static ACache aCache;
 
 
     /** 存储的历史访问实体列表
@@ -43,9 +45,10 @@ public class AppSingle {
      * 网络请求相关
      */
     public final static String scheme = "http"; // can only be "http" or "https"
-    public final static String host = "183.172.197.98";
+    public final static String host = "183.173.130.228";
     public final static int port = 8080;
     public final static String baseUrl = scheme + "://" + host + ":" + port;
+    public final static String failMsg = "OpenEduKG or Network failed!";
 
     //set方法：login/register后初始化用
     public static void setHistoryLabel(ArrayList<String> s)
