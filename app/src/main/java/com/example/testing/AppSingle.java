@@ -35,6 +35,7 @@ public class AppSingle {
     public final static String host = "183.172.197.98";
     public final static int port = 8080;
     public final static String baseUrl = scheme + "://" + host + ":" + port;
+    public final static String failMsg = "OpenEduKG or Network failed!";
 
     public static ACache aCache;
     public static String getCacheKey(String c, String u) {

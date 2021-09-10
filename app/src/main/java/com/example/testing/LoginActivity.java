@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                             if(jsonObject.get("code").getAsInt() == 0) {
                                 JsonArray history = jsonObject.get("history").getAsJsonArray();
                                 String courses = jsonObject.get("courses").getAsString();
-                                //TODO: set AppSingle.subjecList
+                                AppSingle.setSubjectList(AppSingle.TF2List(courses));
                                 try {
                                     for(JsonElement elem: history) {
 
