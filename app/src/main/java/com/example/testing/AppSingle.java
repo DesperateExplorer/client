@@ -295,4 +295,30 @@ public class AppSingle {
         return keyword;
     }
 
+    /**
+     * 附加功能：专题测试记分
+     */
+    public static Integer total_score;
+    public static Integer correct_score;
+
+    public static void ClearScore(){
+        total_score = 0;
+        correct_score = 0;
+    }
+    public static void setScore(boolean correct){
+        total_score+=1;
+        if(correct)
+        {
+            correct_score+=1;
+        }
+    }
+    public static int getCorrect()
+    {
+        return correct_score;
+    }
+    public static int getTotalScore()
+    {
+        return total_score;
+    }
+
 }
