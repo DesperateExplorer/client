@@ -32,7 +32,7 @@ public class QuestionList {
     private String branchD;
 
     //构造函数
-    QuestionList(String answer, String body, String branchA, String branchB, String branchC, String branchD)
+    public QuestionList(String answer, String body, String branchA, String branchB, String branchC, String branchD)
     {
         this.answer = answer;
         this.body = body;

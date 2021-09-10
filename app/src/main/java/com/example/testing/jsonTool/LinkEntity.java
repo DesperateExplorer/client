@@ -31,7 +31,7 @@ public class LinkEntity {
     private String entity_type;
     private String entity_url;
 
-    LinkEntity(String start_index, String end_index,String entity,String entity_type,String entity_url)
+    public LinkEntity(String start_index, String end_index,String entity,String entity_type,String entity_url)
     {
         this.start_index = start_index;
         this.end_index = end_index;

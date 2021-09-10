@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ import com.example.testing.MyApplication;
 import com.example.testing.R;
 import com.example.testing.activity.HistoryListActivity;
 import com.example.testing.activity.KeywordActivity;
+import com.example.testing.activity.PlusTestActivity;
 import com.example.testing.activity.StarListActivity;
 
 import org.w3c.dom.Text;
@@ -83,6 +85,7 @@ public class AccountFragment extends Fragment {
         TextView starList = view.findViewById(R.id.starred);
         TextView historyList = view.findViewById(R.id.history_list);
         TextView keyword = view.findViewById(R.id.history_keyword);
+        Button button = view.findViewById(R.id.test);
 
         //设置动作
         ID.setText(AppSingle.getUsername());
@@ -114,6 +117,14 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), KeywordActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), PlusTestActivity.class);
                 startActivity(intent);
             }
         });
