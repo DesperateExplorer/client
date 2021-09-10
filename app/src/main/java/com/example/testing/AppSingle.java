@@ -1,11 +1,11 @@
 package com.example.testing;
 
 import android.content.Context;
-
 import com.example.testing.jsonTool.EntityContent1;
 import com.example.testing.jsonTool.EntityDescription;
 import com.example.testing.jsonTool.EntityProperty;
 import com.example.testing.jsonTool.QuestionList;
+import com.example.testing.util.ACache;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -36,6 +36,7 @@ public class AppSingle {
     public final static int port = 8080;
     public final static String baseUrl = scheme + "://" + host + ":" + port;
 
+    public static ACache aCache;
 
     /**
      * 缓存相关
