@@ -19,6 +19,7 @@ import com.example.testing.MyApplication;
 import com.example.testing.R;
 import com.example.testing.activity.HistoryListActivity;
 import com.example.testing.activity.KeywordActivity;
+import com.example.testing.activity.PlusRecommendActivity;
 import com.example.testing.activity.PlusTestActivity;
 import com.example.testing.activity.StarListActivity;
 
@@ -85,13 +86,16 @@ public class AccountFragment extends Fragment {
         TextView starList = view.findViewById(R.id.starred);
         TextView historyList = view.findViewById(R.id.history_list);
         TextView keyword = view.findViewById(R.id.history_keyword);
-        Button button = view.findViewById(R.id.test);
+        Button test = view.findViewById(R.id.test);
+        Button recommend = view.findViewById(R.id.recommend);
 
         //设置动作
         ID.setText(AppSingle.getUsername());
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //用户退出，清空Appsingle的所有变量
+                AppSingle.ClearAll();
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
             }
@@ -121,10 +125,18 @@ public class AccountFragment extends Fragment {
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
+        test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), PlusTestActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        recommend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), PlusRecommendActivity.class);
                 startActivity(intent);
             }
         });
