@@ -66,7 +66,7 @@ public class StarListActivity extends AppCompatActivity {
                                 Intent intent = new Intent(StarListActivity.this,EntityActivity.class);
                                 intent.putExtra("label", label.get(i));
                                 intent.putExtra("uri", uri.get(i));
-                                intent.putExtra("subject", Subject.get(i));
+                                intent.putExtra("subject", subject.get(i));
                                 intent.putExtra("backto","History");
                                 startActivity(intent);
                             }
