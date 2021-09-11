@@ -6,6 +6,7 @@ import com.example.testing.AppSingle;
 import com.example.testing.HomeActivity;
 import com.example.testing.MyApplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -13,17 +14,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.testing.R;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class SetSubjectActivity extends AppCompatActivity {
 
-    private MyApplication myApp;
+    private Activity _this = this;
     private List<Integer> subList;
     private Map<Integer, String> int2Subject = new HashMap<Integer,String>(){
         {
@@ -46,7 +56,7 @@ public class SetSubjectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_subject);
-        myApp = (MyApplication) getApplication();
+
         subList = AppSingle.getSubjectList();
 
         Resources res = getResources();
@@ -107,6 +117,7 @@ public class SetSubjectActivity extends AppCompatActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if(MODE == 0) //default
                 {
                     MODE = 1;
@@ -158,6 +169,43 @@ public class SetSubjectActivity extends AppCompatActivity {
 
                     //TODO:发送改后的学科列表
                     //string =
+                    OkHttpClient client = new OkHttpClient();
+                    FormBody formBody = new FormBody
+                            .Builder()
+                            .add("userId", AppSingle.getUsername())
+                            .add("courses", AppSingle.List2TF(AppSingle.getSubjectList()))
+                            .build();
+                    Request request = new Request
+                            .Builder()
+                            .url(AppSingle.baseUrl + "/courses")
+                            .post(formBody)
+                            .build();
+                    Call call = client.newCall(request);
+                    call.enqueue(new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            e.printStackTrace();
+                            _this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(), "学科分类列表仅本地修改!", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            if(response.isSuccessful()) {
+                                _this.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getApplicationContext(), "学科分类列表已同步到后端", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else {
+                            }
+                        }
+                    });
                 }
             }
         });

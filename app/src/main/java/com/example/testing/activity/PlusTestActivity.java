@@ -120,7 +120,7 @@ public class PlusTestActivity extends AppCompatActivity {
                     }
                 });
 
-                return true;
+                return false;
             }
 
             @Override

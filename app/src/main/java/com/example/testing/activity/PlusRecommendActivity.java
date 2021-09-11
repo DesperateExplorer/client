@@ -2,6 +2,7 @@ package com.example.testing.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,14 +12,29 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.testing.AppSingle;
 import com.example.testing.R;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class PlusRecommendActivity extends AppCompatActivity {
 
+    Activity _this = this;
     ListView listView;
     ImageButton back;
     private EntityActivity activity;
@@ -38,31 +54,64 @@ public class PlusRecommendActivity extends AppCompatActivity {
         listView = findViewById(R.id.recommend_list_view);
         back = findViewById(R.id.recommend_back);
 
-        //TODO：获得变量的值
-        //下面是一个例子
-        body.add("近年来,日本与邻国因岛屿争端,关系日益紧张。下列不属于日本近邻的国家是()");
-        answers.add("D");
-        BranchA.add("A.中国");
-        BranchB.add("B.韩国");
-        BranchC.add("C.朝鲜");
-        BranchD.add("D.印度");
+        OkHttpClient client = new OkHttpClient
+                .Builder()
+                .connectTimeout(60000, TimeUnit.MILLISECONDS).writeTimeout(60000, TimeUnit.MILLISECONDS).readTimeout(60000, TimeUnit.MILLISECONDS)
+                .build();
+        HttpUrl httpUrl = new HttpUrl.Builder()
+                .scheme(AppSingle.scheme)
+                .host(AppSingle.host)
+                .port(AppSingle.port)
+                .addPathSegment("questionRecommend")
+                .addQueryParameter("userId", AppSingle.getUsername())
+                .build();
+        Request request = new Request.Builder()
+                .url(httpUrl).build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                System.err.println(AppSingle.failMsg);
+                e.printStackTrace();
+                _this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "错误：对不起，OpenEduKG或网络异常！", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
 
-        body.add("下列各国家中,人均国民生产总值最高的是()");
-        answers.add("B");
-        BranchA.add("A.印度、巴基斯坦");
-        BranchB.add("B.日本、新加坡");
-        BranchC.add("C.沙特阿拉伯、以色列");
-        BranchD.add("D.韩国、马来西亚");
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String result = response.body().string();
+                if(response.isSuccessful()) {
+                    JsonArray jsonArray = JsonParser.parseString(result).getAsJsonArray();
+                    for(JsonElement element: jsonArray) {
+                        body.add(element.getAsJsonObject().get("body").getAsString());
+                        answers.add(element.getAsJsonObject().get("answer").getAsString());
+                        BranchA.add(element.getAsJsonObject().get("branchA").getAsString());
+                        BranchB.add(element.getAsJsonObject().get("branchB").getAsString());
+                        BranchC.add(element.getAsJsonObject().get("branchC").getAsString());
+                        BranchD.add(element.getAsJsonObject().get("branchD").getAsString());
+                    }
+                    ArrayList<String> list = new ArrayList<>();
+                    for(String q: body)
+                    {
+                        list.add(q);
+                    }
+                    _this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            //在listView中显示出来
+                            BaseAdapter adapter = new ArrayAdapter<String>(PlusRecommendActivity.this, android.R.layout.simple_list_item_1, list);
+                            listView.setAdapter(adapter);
+                        }
+                    });
+                } else  {
 
-
-        //在listView中显示出来
-        ArrayList<String> list = new ArrayList<>();
-        for(String q: body)
-        {
-            list.add(q);
-        }
-        BaseAdapter adapter = new ArrayAdapter<String>(PlusRecommendActivity.this, android.R.layout.simple_list_item_1, list);
-        listView.setAdapter(adapter);
+                }
+            }
+        });
 
         //点击试题跳转
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
