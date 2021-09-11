@@ -151,6 +151,28 @@ public class AppSingle {
         return false;
     }
 
+    public static void DedupHistory(String uri, String subject)
+    {
+        System.out.println("history: ");
+        System.out.println(uri);
+        System.out.println(subject);
+        for(int i = 0;i < historyUri.size();i++)
+        {
+            if(historyUri.get(i).equals(uri))
+            {
+                System.out.println("yes");
+                System.out.println(historySubject.get(i));
+                if(historySubject.get(i).equals(subject)) {
+                    historyLabel.remove(i);
+                    historySubject.remove(i);
+                    historyUri.remove(i);
+                    return;
+                }
+            }
+        }
+        return;
+    }
+
 
     /** 收藏实体列表
      *  {label, uri, subject} 三元组

@@ -295,9 +295,10 @@ public class SearchActivity extends AppCompatActivity {
                                         e.printStackTrace();
                                     }
                                     //加入访问列表
+                                    AppSingle.DedupHistory(uri.get(i),AppSingle.SUBJECT2ENG.get(currentSubject)); //把已经加入历史列表的删除
                                     AppSingle.addLabel(label.get(i));
                                     AppSingle.addUri(uri.get(i));
-                                    AppSingle.addSubject(currentSubject);
+                                    AppSingle.addSubject(AppSingle.SUBJECT2ENG.get(currentSubject));
                                     System.out.println(currentSubject);
                                     visited.set(i,true);
                                     _this.runOnUiThread(new Runnable() {
