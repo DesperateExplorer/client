@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -172,7 +173,10 @@ public class SearchActivity extends AppCompatActivity {
                 //Deprecate: 把string写入本地缓存
 //                AppSingle.addKeyWord(string);
 
-                OkHttpClient client = new OkHttpClient();
+                OkHttpClient client = new OkHttpClient
+                        .Builder()
+                        .connectTimeout(60000, TimeUnit.MILLISECONDS).writeTimeout(60000, TimeUnit.MILLISECONDS).readTimeout(60000, TimeUnit.MILLISECONDS)
+                        .build();
                 HttpUrl httpUrl = new HttpUrl.Builder()
                         .scheme(AppSingle.scheme)
                         .host(AppSingle.host)
@@ -211,11 +215,12 @@ public class SearchActivity extends AppCompatActivity {
                         for(SearchListEntity searchListEntity: list){
                             label.add(searchListEntity.getLabel());
                             uri.add(searchListEntity.getUri());
-                            visited.add(AppSingle.checkEntity(searchListEntity.getUri(),currentSubject));
+                            visited.add(AppSingle.checkEntity(searchListEntity.getUri(), AppSingle.SUBJECT2ENG.get(currentSubject)));
                         }
                         _this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                System.err.println("alskdfhawjdfasdfa: "+ label.toString() + visited.toString());
                                 adapter = new SearchListAdapter(SearchActivity.this, label, list, visited, R.layout.item);
                                 listView.setAdapter(adapter);
                             }
@@ -230,7 +235,10 @@ public class SearchActivity extends AppCompatActivity {
 
 
 
-                        OkHttpClient client = new OkHttpClient();
+                        OkHttpClient client = new OkHttpClient
+                                .Builder()
+                                .connectTimeout(60000, TimeUnit.MILLISECONDS).writeTimeout(60000, TimeUnit.MILLISECONDS).readTimeout(60000, TimeUnit.MILLISECONDS)
+                                .build();
                         HttpUrl httpUrl = new HttpUrl.Builder()
                                 .scheme(AppSingle.scheme)
                                 .host(AppSingle.host)
@@ -268,6 +276,7 @@ public class SearchActivity extends AppCompatActivity {
                                             intent.putExtra("label", label.get(i));
                                             intent.putExtra("uri", uri.get(i));
                                             intent.putExtra("subject", AppSingle.SUBJECT2ENG.get(currentSubject));
+                                            intent.putExtra("backto","Search");
                                             startActivity(intent);
                                         }
                                     });
@@ -302,6 +311,7 @@ public class SearchActivity extends AppCompatActivity {
                                             intent.putExtra("label", label.get(i));
                                             intent.putExtra("uri", uri.get(i));
                                             intent.putExtra("subject", AppSingle.SUBJECT2ENG.get(currentSubject));
+                                            intent.putExtra("backto","Search");
                                             startActivity(intent);
                                         }
                                     });

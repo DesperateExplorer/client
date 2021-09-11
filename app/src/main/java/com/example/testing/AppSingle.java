@@ -6,6 +6,8 @@ import com.example.testing.jsonTool.EntityDescription;
 import com.example.testing.jsonTool.EntityProperty;
 import com.example.testing.jsonTool.QuestionList;
 import com.example.testing.util.ACache;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.Executors;
 
 public class AppSingle {
     private static Context singleContext;
@@ -79,6 +83,8 @@ public class AppSingle {
         }
     }
 
+    public final static ListeningExecutorService service = MoreExecutors.listeningDecorator(Executors.newCachedThreadPool());
+
     /** 存储的历史访问实体列表
      *  {label, uri, subject} 三元组
      */
@@ -137,7 +143,8 @@ public class AppSingle {
             if(historyUri.get(i).equals(uri))
             {
                 System.out.println("yes");
-                if(SUBJECT2INT.get(historySubject.get(i)) == SUBJECT2INT.get(subject))
+                System.out.println(historySubject.get(i));
+                if(historySubject.get(i).equals(subject))
                     return true;
             }
         }
@@ -198,7 +205,7 @@ public class AppSingle {
         {
             if(starUri.get(i).equals(t_uri))
             {
-                if(SUBJECT2INT.get(starSubject.get(i)) == SUBJECT2INT.get(t_subject))
+                if(starSubject.get(i).equals(t_subject))
                     return i;
             }
         }
@@ -230,7 +237,7 @@ public class AppSingle {
             if(starUri.get(i).equals(uri))
             {
                 System.out.println("yes");
-                if(SUBJECT2INT.get(starSubject.get(i)) == SUBJECT2INT.get(subject))
+                if(starSubject.get(i).equals(subject))
                     return true;
             }
         }

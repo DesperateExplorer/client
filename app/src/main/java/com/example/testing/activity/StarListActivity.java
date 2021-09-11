@@ -1,5 +1,6 @@
 package com.example.testing.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,13 +11,20 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.testing.AppSingle;
 import com.example.testing.MyApplication;
 import com.example.testing.R;
 import com.example.testing.SearchActivity;
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
 
 public class StarListActivity extends AppCompatActivity {
 
@@ -41,12 +49,41 @@ public class StarListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //TODO：label，subject 获得实体详情页的json
-                Intent intent = new Intent(StarListActivity.this,EntityActivity.class);
-                intent.putExtra("label", label.get(i));
-                intent.putExtra("uri", uri.get(i));
-                intent.putExtra("subject", subject.get(i));
-                startActivity(intent);
+                ListenableFuture<JSONObject> future = AppSingle.service.submit(new Callable<JSONObject>() {
+                    @Override
+                    public JSONObject call() throws Exception {
+                        return AppSingle.aCache.getAsJSONObject(AppSingle.getCacheKey(subject.get(i), uri.get(i)));
+                    }
+                });
+                Futures.addCallback(future, new FutureCallback<JSONObject>() {
+                    @Override
+                    public void onSuccess(@Nullable JSONObject result) {
+                        AppSingle.detail = result;
+                        _this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), "从本地缓存加载", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(StarListActivity.this,EntityActivity.class);
+                                intent.putExtra("label", label.get(i));
+                                intent.putExtra("uri", uri.get(i));
+                                intent.putExtra("subject", Subject.get(i));
+                                intent.putExtra("backto","History");
+                                startActivity(intent);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+                        t.printStackTrace();
+                        _this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), "加载缓存失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }, AppSingle.service);
             }
         });
 

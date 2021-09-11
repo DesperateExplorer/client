@@ -63,9 +63,14 @@ public class PlusTestActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int correct = AppSingle.getCorrect();
                 int total = AppSingle.getTotalScore();
-                double rate = (double)correct/(double)total * 100;
-
-                textView.setText("本次测试您的分数是："+correct+"分/"+total+"分, \n 正确率"+rate+"%, 继续加油吧！");
+                if(total>0)
+                {
+                    double rate = (double)correct/(double)total * 100;
+                    textView.setText("本次测试您的分数是："+correct+"分/"+total+"分, \n 正确率"+rate+"%, 继续加油吧！");
+                }
+                else{
+                    textView.setText("快开始做题吧！");
+                }
             }
         });
 
@@ -92,7 +97,7 @@ public class PlusTestActivity extends AppCompatActivity {
         PopupMenu popupMenu = new PopupMenu(PlusTestActivity.this, view);
 
         // 获取布局文件
-        popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+        popupMenu.getMenuInflater().inflate(R.menu.course_menu, popupMenu.getMenu());
         popupMenu.show();
 
         // 通过上面这几行代码，就可以把控件显示出来了
