@@ -70,7 +70,7 @@ public class SearchListAdapter extends ArrayAdapter<String> {
 
         if(visited.get(position) == true)
         {
-            textView.setTextColor(0xff5F5E5E);
+            textView.setTextColor(0xff9DA7BC);
         }
         else {
             textView.setTextColor(0xff000000);

@@ -7,6 +7,9 @@ import com.example.testing.jsonTool.EntityProperty;
 import com.example.testing.jsonTool.QuestionList;
 import com.example.testing.util.ACache;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,6 +60,24 @@ public class AppSingle {
     /**
      * 缓存相关
      */
+    public static JSONObject detail;
+    public static void initDetail() {
+        detail = new JSONObject();
+        try {
+            detail.put("uri", "");
+            detail.put("label", "");
+            detail.put("course", "");
+            detail.put("favorite", false);
+            detail.put("description", new JSONArray(new ArrayList<>()));
+            detail.put("description1", new JSONArray(new ArrayList<>()));
+            detail.put("property", new JSONArray(new ArrayList<>()));
+            detail.put("content1", new JSONArray(new ArrayList<>()));
+            detail.put("content2", new JSONArray(new ArrayList<>()));
+            detail.put("questionList", new JSONArray(new ArrayList<>()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /** 存储的历史访问实体列表
      *  {label, uri, subject} 三元组

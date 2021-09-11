@@ -4,7 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.20989583333333334" />
+        <entry key="..\:/files/2_2021_Summer/Java_Program_Design_and_Training/Project/client/app/src/main/res/layout/activity_entity.xml" value="0.24320652173913043" />
         <entry key="..\:/files/2_2021_Summer/Java_Program_Design_and_Training/Project/client/app/src/main/res/layout/activity_link.xml" value="0.25885416666666666" />
+        <entry key="..\:/files/2_2021_Summer/Java_Program_Design_and_Training/Project/client/app/src/main/res/layout/activity_search.xml" value="0.24320652173913043" />
+        <entry key="..\:/files/2_2021_Summer/Java_Program_Design_and_Training/Project/client/app/src/main/res/layout/fragment_description.xml" value="0.24320652173913043" />
+        <entry key="..\:/files/2_2021_Summer/Java_Program_Design_and_Training/Project/client/app/src/main/res/layout/fragment_explore.xml" value="0.24320652173913043" />
+        <entry key="..\:/files/2_2021_Summer/Java_Program_Design_and_Training/Project/client/app/src/main/res/layout/fragment_home.xml" value="0.24320652173913043" />
+        <entry key="..\:/files/2_2021_Summer/Java_Program_Design_and_Training/Project/client/app/src/main/res/layout/fragment_relation.xml" value="0.24320652173913043" />
+        <entry key="..\:/files/2_2021_Summer/Java_Program_Design_and_Training/Project/client/app/src/main/res/layout/list_view.xml" value="0.24320652173913043" />
+        <entry key="..\:/files/2_2021_Summer/Java_Program_Design_and_Training/Project/client/app/src/main/res/layout/question_item.xml" value="0.24320652173913043" />
+        <entry key="..\:/files/2_2021_Summer/Java_Program_Design_and_Training/Project/client/app/src/main/res/layout/relation_item.xml" value="0.24320652173913043" />
+        <entry key="..\:/files/2_2021_Summer/Java_Program_Design_and_Training/Project/client/app/src/main/res/menu/course_menu.xml" value="0.25885416666666666" />
+        <entry key="..\:/files/2_2021_Summer/Java_Program_Design_and_Training/Project/client/app/src/main/res/menu/menu.xml" value="0.25885416666666666" />
         <entry key="app/src/main/res/drawable/btn_round_selector.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/button.xml" value="0.23108108108108108" />
         <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24_fill.xml" value="0.228" />

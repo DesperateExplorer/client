@@ -5,6 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="20dp"
     tools:context=".activity.PlusTestActivity">
 
     <LinearLayout
@@ -24,14 +27,23 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:queryHint="请输入想要复习的知识点" />
-        <Button
-            android:id="@+id/test_finish"
+
+        <TextView
+            android:id="@+id/choose_course"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="结束测试" />
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="选择学科" />
 
     </LinearLayout>
 
+
+    <Button
+        android:id="@+id/test_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="结束测试" />
 
     <TextView
         android:id="@+id/test_result"

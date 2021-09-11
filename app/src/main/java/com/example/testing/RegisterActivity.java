@@ -76,6 +76,12 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call call, IOException e) {
                         System.err.println("Register: " + e.getMessage());
+                        _thisActivity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), "网络异常", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
 
                     @Override

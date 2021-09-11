@@ -82,7 +82,7 @@ public class RelationFragment extends Fragment {
 
         //ShowRelation: 需要传入listView的数据格式，可以从jsonTool文件夹中找到
         //下面是一个例子
-        Data.add(new ShowRelation("predicate","subject","object"));
+        Data = ((EntityActivity) getActivity()).getContent();
 
         //获得变量的值:从content1获取 subject 和 predicate
 

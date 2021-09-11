@@ -5,20 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="20dp"
     tools:context=".SearchActivity">
+
+    <TextView
+        android:id="@+id/subject_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="20dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="4"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
 
         <scut.carson_ho.searchview.SearchView
             android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_width="250dp"
+            android:layout_height="150px"
             app:searchBlockColor="@color/light_gray"
             app:searchBlockHeight="150"
             app:textColorSearch="#9b9b9b"
@@ -27,29 +39,45 @@
 
         </scut.carson_ho.searchview.SearchView>
 
-        <TextView
-            android:id="@+id/sort"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:clickable="true"
-            android:gravity="bottom"
-            android:text="默认升序" />
-
-        <TextView
-            android:id="@+id/filter"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:clickable="true"
-            android:gravity="bottom"
-            android:text="无筛选" />
         <Space
-            android:layout_width="20dp"
+            android:layout_width="10dp"
             android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/sort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:text="默认升序" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <TextView
+                android:id="@+id/filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:clickable="true"
+                android:gravity="bottom"
+                android:text="无筛选" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <ListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="0.5" />
 </LinearLayout>

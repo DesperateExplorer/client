@@ -4,15 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.Image;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.testing.AppSingle;
 import com.example.testing.R;
+import com.example.testing.SearchActivity;
 import com.example.testing.adapter.PlusTestAdapter;
 import com.example.testing.adapter.RelationAdapter;
 import com.example.testing.jsonTool.QuestionList;
@@ -21,6 +24,9 @@ import com.example.testing.jsonTool.ShowRelation;
 import java.util.ArrayList;
 
 public class PlusTestActivity extends AppCompatActivity {
+
+    TextView set_course;
+    String course;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,7 @@ public class PlusTestActivity extends AppCompatActivity {
         Button button = findViewById(R.id.test_finish);
         TextView textView = findViewById(R.id.test_result);
         ImageView imageView = findViewById(R.id.plus_test_back);
+        set_course = findViewById(R.id.choose_course);
 
         //设置接收数据的局部变量
         ArrayList<QuestionList> Data = new ArrayList<>();
@@ -69,5 +76,40 @@ public class PlusTestActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        //设置学科选择
+        set_course.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopupMenu(view);
+            }
+        });
+    }
+
+    // 设置popup Menu
+    private void showPopupMenu(View view) {
+        // 这里的view代表popupMenu需要依附的view
+        PopupMenu popupMenu = new PopupMenu(PlusTestActivity.this, view);
+
+        // 获取布局文件
+        popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+        popupMenu.show();
+
+        // 通过上面这几行代码，就可以把控件显示出来了
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                set_course.setText(item.getTitle());
+                course = AppSingle.SUBJECT2ENG.get((String) item.getTitle());
+                return true;
+            }
+        });
+        popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
+            @Override
+            public void onDismiss(PopupMenu menu) {
+                // 控件消失时的事件
+            }
+        });
+
     }
 }

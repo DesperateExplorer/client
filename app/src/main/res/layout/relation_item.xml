@@ -9,11 +9,11 @@
 
     <TextView
         android:id="@+id/subject"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="subject"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -27,15 +27,16 @@
 
         <TextView
             android:id="@+id/predicate"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="center"
+            android:inputType="textMultiLine"
             android:text="predicate" />
 
         <ImageView
             android:id="@+id/imageView3"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:scaleX="3"
@@ -45,9 +46,9 @@
 
     <TextView
         android:id="@+id/object"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="object"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 </LinearLayout>
