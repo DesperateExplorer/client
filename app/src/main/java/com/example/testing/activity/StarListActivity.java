@@ -3,6 +3,7 @@ package com.example.testing.activity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,7 @@ import java.util.concurrent.Callable;
 public class StarListActivity extends AppCompatActivity {
 
     private BaseAdapter adapter;
+    Activity _this = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
