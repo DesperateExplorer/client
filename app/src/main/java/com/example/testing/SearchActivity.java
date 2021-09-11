@@ -163,11 +163,13 @@ public class SearchActivity extends AppCompatActivity {
                 //DeprecateTODO：string是用户输入的关键词，需要存
                 //TODONE：调用网络接口得到result
                 //parameters: string, subject, sort, filter
-
+                if (string.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "搜索内容不能为空", Toast.LENGTH_SHORT).show();
+                } else {
                 //subject
                 Intent intent = getIntent();
                 currentSubject = intent.getStringExtra("subject");
-                System.out.println("search activity: "+currentSubject);
+                System.out.println("search activity: " + currentSubject);
                 //sort: 本文件声明的sort
 
                 //Deprecate: 把string写入本地缓存
@@ -208,11 +210,12 @@ public class SearchActivity extends AppCompatActivity {
                     public void onResponse(Call call, Response response) throws IOException {
                         JsonArray jsonData = JsonParser.parseString(response.body().string()).getAsJsonArray();
                         Gson gson = new Gson();
-                        list = gson.fromJson(jsonData,new TypeToken<List<SearchListEntity>>(){}.getType());
+                        list = gson.fromJson(jsonData, new TypeToken<List<SearchListEntity>>() {
+                        }.getType());
                         label = new ArrayList<>();
                         uri = new ArrayList<>();
                         visited = new ArrayList<>();
-                        for(SearchListEntity searchListEntity: list){
+                        for (SearchListEntity searchListEntity : list) {
                             label.add(searchListEntity.getLabel());
                             uri.add(searchListEntity.getUri());
                             visited.add(AppSingle.checkEntity(searchListEntity.getUri(), AppSingle.SUBJECT2ENG.get(currentSubject)));
@@ -220,7 +223,7 @@ public class SearchActivity extends AppCompatActivity {
                         _this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                System.err.println("alskdfhawjdfasdfa: "+ label.toString() + visited.toString());
+                                System.err.println("alskdfhawjdfasdfa: " + label.toString() + visited.toString());
                                 adapter = new SearchListAdapter(SearchActivity.this, label, list, visited, R.layout.item);
                                 listView.setAdapter(adapter);
                             }
@@ -229,10 +232,9 @@ public class SearchActivity extends AppCompatActivity {
                 });
 
 
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
 
 
                         OkHttpClient client = new OkHttpClient
@@ -256,7 +258,7 @@ public class SearchActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(Call call, IOException e) {
                                 AppSingle.detail = AppSingle.aCache.getAsJSONObject(AppSingle.getCacheKey(AppSingle.SUBJECT2ENG.get(currentSubject), uri.get(i)));
-                                if(AppSingle.detail == null) {
+                                if (AppSingle.detail == null) {
                                     _this.runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -272,11 +274,11 @@ public class SearchActivity extends AppCompatActivity {
                                             System.out.println(label.get(i));
 
                                             Toast.makeText(getApplicationContext(), "从本地缓存加载", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(SearchActivity.this,EntityActivity.class);
+                                            Intent intent = new Intent(SearchActivity.this, EntityActivity.class);
                                             intent.putExtra("label", label.get(i));
                                             intent.putExtra("uri", uri.get(i));
                                             intent.putExtra("subject", AppSingle.SUBJECT2ENG.get(currentSubject));
-                                            intent.putExtra("backto","Search");
+                                            intent.putExtra("backto", "Search");
                                             startActivity(intent);
                                         }
                                     });
@@ -287,7 +289,7 @@ public class SearchActivity extends AppCompatActivity {
                             public void onResponse(Call call, Response response) throws IOException {
                                 String result = response.body().string();
                                 System.err.println(result);
-                                if(response.isSuccessful()) {
+                                if (response.isSuccessful()) {
                                     try {
                                         AppSingle.detail = new JSONObject(result);
                                         AppSingle.aCache.put(AppSingle.getCacheKey(AppSingle.SUBJECT2ENG.get(currentSubject), uri.get(i)), AppSingle.detail);
@@ -295,12 +297,12 @@ public class SearchActivity extends AppCompatActivity {
                                         e.printStackTrace();
                                     }
                                     //加入访问列表
-                                    AppSingle.DedupHistory(uri.get(i),AppSingle.SUBJECT2ENG.get(currentSubject)); //把已经加入历史列表的删除
+                                    AppSingle.DedupHistory(uri.get(i), AppSingle.SUBJECT2ENG.get(currentSubject)); //把已经加入历史列表的删除
                                     AppSingle.addLabel(label.get(i));
                                     AppSingle.addUri(uri.get(i));
                                     AppSingle.addSubject(AppSingle.SUBJECT2ENG.get(currentSubject));
                                     System.out.println(currentSubject);
-                                    visited.set(i,true);
+                                    visited.set(i, true);
                                     _this.runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -308,11 +310,11 @@ public class SearchActivity extends AppCompatActivity {
                                             adapter.notifyDataSetChanged();
                                             System.out.println(label.get(i));
 
-                                            Intent intent = new Intent(SearchActivity.this,EntityActivity.class);
+                                            Intent intent = new Intent(SearchActivity.this, EntityActivity.class);
                                             intent.putExtra("label", label.get(i));
                                             intent.putExtra("uri", uri.get(i));
                                             intent.putExtra("subject", AppSingle.SUBJECT2ENG.get(currentSubject));
-                                            intent.putExtra("backto","Search");
+                                            intent.putExtra("backto", "Search");
                                             startActivity(intent);
                                         }
                                     });
@@ -324,6 +326,7 @@ public class SearchActivity extends AppCompatActivity {
 
                     }
                 });
+            }
             }
         });
 

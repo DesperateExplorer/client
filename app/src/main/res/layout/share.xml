@@ -54,6 +54,15 @@
             android:textSize="20dp" />
 
         <TextView
+            android:id="@+id/Header_preview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:singleLine="false"
+            android:textSize="20dp"
+            android:textColor="@color/black" />
+
+        <TextView
             android:id="@+id/Preview1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,28 +82,6 @@
             android:scrollbars="vertical"
             android:singleLine="false"
             android:text="属性："
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/Preview3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_textview_border"
-            android:maxLines="15"
-            android:scrollbars="vertical"
-            android:singleLine="false"
-            android:text="关系："
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/Preview4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/round_textview_border"
-            android:maxLines="15"
-            android:scrollbars="vertical"
-            android:singleLine="false"
-            android:text="关联试题："
             android:textColor="@color/black" />
 
         <Button

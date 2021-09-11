@@ -33,6 +33,7 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -208,6 +209,19 @@ public class EntityActivity extends QMUIFragmentActivity {
             public void onClick(View view) {
                 Dialog ShareDialog = new Dialog(EntityActivity.this, R.style.my_dialog);
                 LinearLayout root = (LinearLayout) LayoutInflater.from(EntityActivity.this).inflate(R.layout.share, null);
+                TextView textView1 = root.findViewById(R.id.Preview1);
+                TextView textView2 = root.findViewById(R.id.Preview2);
+                TextView textView =  root.findViewById(R.id.Header_preview);
+
+                textView.setText("实体名称:"+label);
+                if(getDescription().size()>0)
+                    textView1.setText("描述："+getDescription().get(0));
+                else
+                    textView1.setVisibility(View.INVISIBLE);
+                if(getProperty().size()>0)
+                    textView2.setText("属性："+getProperty().get(0).getPredicateLabel()+": "+getProperty().get(0).getObjectLabel());
+                else
+                    textView2.setVisibility(View.INVISIBLE);
 
                 TextView content = root.findViewById(R.id.content);
                 //取消按钮

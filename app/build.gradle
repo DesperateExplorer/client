@@ -5,7 +5,7 @@ plugins {
 android {
     signingConfigs {
         release {
-            storeFile file('/Users/gaojialu/.android/testing.keystore')
+            storeFile file('\\.android\\testing.keystore')
             storePassword '123456'
             keyAlias 'aaa'
             keyPassword '123456'
